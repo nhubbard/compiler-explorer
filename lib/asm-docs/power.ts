@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 import {AssemblyInstructionInfo, BaseAssemblyDocumentationProvider} from './base.js';
-import {getAsmOpcode} from './generated/asm-docs-power.js';
+import {getAsmOpcode, reduceOpcode} from './generated/asm-docs-power.js';
 
 export class PowerDocumentationProvider extends BaseAssemblyDocumentationProvider {
     public static get key() {
@@ -31,6 +31,19 @@ export class PowerDocumentationProvider extends BaseAssemblyDocumentationProvide
     }
 
     public override getInstructionInformation(instruction: string): AssemblyInstructionInfo | null {
-        return getAsmOpcode(instruction) || null;
+        // Attempt to reduce an extended mnemonic to a base instruction.
+        const reduced = reduceOpcode(instruction);
+        // Get the documentation for the reduced instruction.
+        const asm = getAsmOpcode(reduced);
+        // If there's no documentation, abandon ship.
+        if (!asm) return null;
+        // If the reduced instruction and base instruction are the same, return the unmodified documentation.
+        if (instruction === reduced) return asm;
+        // Otherwise, construct a modified documentation that clarifies the difference.
+        return {
+            html: asm.html,
+            tooltip: `${asm.tooltip} (Base Instruction for Extended Mnemonic ${instruction.toUpperCase()})`,
+            url: asm.url,
+        };
     }
 }
