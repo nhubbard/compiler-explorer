@@ -936,6 +936,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Load Doubleword Reserve Indexed",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-ldarx-load-doubleword-reserve-indexed-instruction"
             };
+        case "LDBRX":
+            return {
+                "html": `
+                    <p>The <strong>ldbrx</strong> instruction loads a doubleword from storage, byte-reversed, from a specified location in memory addressed by the effective address (EA) into the target general-purpose register (GPR) <em>RT</em>.</p>
+                    <p>The EA is calculated as the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the contents of GPR <em>RB</em>.</p>
+                    <p>
+                        The bytes of the doubleword in storage addressed by EA are loaded into <em>RT</em> as follows:
+                        <ul>
+                            <li>Bits 0-7 of the doubleword are loaded into <em>RT</em>56:63.</li>
+                            <li>Bits 8-15 of the doubleword are loaded into <em>RT</em>48:55.</li>
+                            <li>Bits 16-23 of the doubleword are loaded into <em>RT</em>40:47.</li>
+                            <li>Bits 24-31 of the doubleword are loaded into <em>RT</em>32:39.</li>
+                            <li>Bits 32-39 of the doubleword are loaded into <em>RT</em>24:31.</li>
+                            <li>Bits 40-47 of the doubleword are loaded into <em>RT</em>16:23.</li>
+                            <li>Bits 48-55 of the doubleword are loaded into <em>RT</em>8:15.</li>
+                            <li>Bits 56-63 of the doubleword are loaded into <em>RT</em>0:7.</li>
+                        </ul>
+                    </p>
+                `,
+                "tooltip": "Load Doubleword Byte-Reverse Indexed",
+                "url": powerIsaDocumentation
+            };
         case "LDU":
             return {
                 "html": `
@@ -2230,6 +2252,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 `,
                 "tooltip": "Store Double Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-std-store-double-word-instruction"
+            };
+        case "STDBRX":
+            return {
+                "html": `
+                    <p>The <strong>stdbrx</strong> instruction stores a doubleword from the source general-purpose register (GPR) <em>RS</em> into storage, byte-reversed, at the specified location in memory addressed by the effective address (EA).</p>
+                    <p>The EA is calculated as the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the contents of GPR <em>RB</em>.</p>
+                    <p>
+                        The bytes of <em>RS</em> are stored into the doubleword in storage addressed by EA as follows:
+                        <ul>
+                            <li>Bits 56-63 of <em>RS</em> are stored into bits 0-7 of the doubleword in storage.</li>
+                            <li>Bits 48-55 of <em>RS</em> are stored into bits 8-15 of the doubleword in storage.</li>
+                            <li>Bits 40-47 of <em>RS</em> are stored into bits 16-23 of the doubleword in storage.</li>
+                            <li>Bits 32-39 of <em>RS</em> are stored into bits 24-31 of the doubleword in storage.</li>
+                            <li>Bits 24-31 of <em>RS</em> are stored into bits 32-39 of the doubleword in storage.</li>
+                            <li>Bits 16-23 of <em>RS</em> are stored into bits 40-47 of the doubleword in storage.</li>
+                            <li>Bits 8-15 of <em>RS</em> are stored into bits 48-55 of the doubleword in storage.</li>
+                            <li>Bits 0-7 of <em>RS</em> are stored into bits 56-63 of the doubleword in storage.</li>
+                        </ul>
+                    </p>
+                `,
+                "tooltip": "Store Doubleword Byte-Reverse Indexed",
+                "url": powerIsaDocumentation
             };
         case "STDCX.":
             return {
