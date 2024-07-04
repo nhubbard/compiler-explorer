@@ -1668,6 +1668,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Load Halfword and Zero",
                 "url": powerIsaDocumentation
             };
+        case "PLWA":
+            return {
+                "html": `
+                    <p>The <strong>plwa</strong> instruction loads a word in storage located at the effective address (EA) into the low-order 32 bits of the target general-purpose register (GPR) <em>RT</em>. The value is then sign-extended to fill the high-order 32 bits of the register.</p>
+                    <p>For <strong>plwa</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plwa</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>The word in storage addressed by EA is loaded into bits 32-63 of GPR <em>RT</em>. Bits 0-31 of GPR <em>RT</em> are filled with a copy of bit 0 of the loaded word.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Word Algebraic",
+                "url": powerIsaDocumentation
+            };
+        case "PLWZ":
+            return {
+                "html": `
+                    <p>The <strong>plwz</strong> instruction loads a word in storage from a specified location in memory addressed by the effective address (EA) into the target general-purpose register (GPR) <em>RT</em>.</p>
+                    <p>For <strong>plwz</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plwz</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>The word in storage addressed by EA is loaded into bits 32-63 of GPR <em>RT</em>. Bits 0-31 of GPR <em>RT</em> are set to 0.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Word and Zero",
+                "url": powerIsaDocumentation
+            };
         case "POPCNTBD":
             return {
                 "html": `<p>The <strong>popcntbd</strong> instruction counts the number of one bits in each byte of register <em>RS</em> and places the count in to the corresponding byte of register <em>RA</em>. The number ranges from 0 to 8, inclusive.</p>`,
