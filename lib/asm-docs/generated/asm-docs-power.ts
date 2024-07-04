@@ -1679,6 +1679,18 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Load Halfword and Zero",
                 "url": powerIsaDocumentation
             };
+        case "PLQ":
+            return {
+                "html": `
+                    <p>The <strong>plq</strong> instruction loads a quad word in storage from a specified location in memory addressed by the effective address (EA) into the target general-purpose registers (GPRs) <em>RT</em> and <em>RT+1</em>.</p>
+                    <p>For <strong>plq</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plq</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>For Big-Endian byte ordering, the quadword in storage addressed by EA is loaded into <em>RT</em>||<em>RT+1</em>. For Little-Endian byte ordering, the quadword in storage addressed by EA is byte-reversed and loaded into <em>RT+1</em>||<em>RT</em>.</p>
+                    <p>If <em>RT</em> is odd or <em>RT</em> equals <em>RA</em>, the instruction form is invalid. If <em>RT</em> equals <em>RA</em>, an attempt to execute this instruction will invoke the system illegal instruction error handler. (This includes the case of <em>RT</em> equals <em>RA</em> equals 0.)</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Quadword",
+                "url": powerIsaDocumentation
+            }
         case "PLWA":
             return {
                 "html": `
@@ -1706,6 +1718,58 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>popcntbd</strong> instruction counts the number of one bits in each byte of register <em>RS</em> and places the count in to the corresponding byte of register <em>RA</em>. The number ranges from 0 to 8, inclusive.</p>`,
                 "tooltip": "Population Count Byte Doubleword",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-popcntbd-population-count-byte-doubleword-instruction"
+            };
+        case "PSTB":
+            return {
+                "html": `
+                    <p>The <strong>pstb</strong> instruction stores bits 56-63 of general-purpose register (GPR) <em>RS</em> into a byte of storage addressed by the effective address (EA).</p>
+                    <p>For <strong>pstb</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>pstb</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Store Byte",
+                "url": powerIsaDocumentation
+            };
+        case "PSTD":
+            return {
+                "html": `
+                    <p>The <strong>pstd</strong> instruction stores a doubleword in storage from the source general-purpose register (GPR) <em>RS</em> into the specified location in memory referenced by the effective address (EA).</p>
+                    <p>For <strong>pstd</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>pstd</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Store Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "PSTH":
+            return {
+                "html": `
+                    <p>The <strong>psth</strong> instruction stores bits 48-63 of general-purpose register (GPR) <em>RS</em> into the halfword of storage addressed by the effective address (EA).</p>
+                    <p>For <strong>psth</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>psth</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Store Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "PSTQ":
+            return {
+                "html": `
+                    <p>The <strong>pstq</strong> instruction stores a quad-word in storage from the source general-purpose registers (GPR) <em>RS</em> and <em>RS+1</em> into the specified location in memory referenced by the effective address (EA).</p>
+                    <p>For <strong>pstq</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>pstq</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>For Big-Endian byte ordering, the content of the register pair <em>RS</em>||<em>RS+1</em> is stored into the quadword in storage addressed by EA. For Little-Endian byte ordering, the content of the register pair <em>RS</em>||<em>RS+1</em> is byte-reversed and stored into the quadword in storage addressed by EA. For <strong>pstq</strong> and Little-Endian byte ordering, the content of the register pair <em>RS+1</em>||<em>RS</em> is byte-reversed and stored into the quadword in storage addressed by EA.</p>
+                    <p>If <em>RS</em> is odd, the instruction form is invalid.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Store Quadword",
+                "url": powerIsaDocumentation
+            };
+        case "PSTW":
+            return {
+                "html": `
+                    <p>The <strong>pstw</strong> instruction stores bits 32-63 of general-purpose register (GPR) <em>RS</em> into a word of storage addressed by the effective address (EA).</p>
+                    <p>For <strong>pstw</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>pstw</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Store Word",
+                "url": powerIsaDocumentation
             };
         case "RAC":
         case "RAC.":
