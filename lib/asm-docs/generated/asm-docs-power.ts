@@ -44,6 +44,15 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Add or Compute Address",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-add-add-cax-compute-address-instruction"
             };
+        case "ADDPCIS":
+            return {
+                "html": `
+                    <p>The <strong>addpcis</strong> instruction places the sum of the Next Instruction Address (NIA) and the value <em>D || 0x0000</em> into the target general-purpose register (GPR) <em>RT</em>.</p>
+                    <p>The effective address is calculated by adding the value <em>D</em> concatenated with <em>0x0000</em> to the NIA. This sum is then stored in the target GPR <em>RT</em>.</p>
+                `,
+                "tooltip": "Add PC Immediate Shifted",
+                "url": powerIsaDocumentation
+            };
         case "A":
         case "A.":
         case "AO":
@@ -73,6 +82,15 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 `,
                 "tooltip": "Add Extended",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-adde-ae-add-extended-instruction"
+            };
+        case "ADDEX":
+            return {
+                "html": `
+                    <p>The <strong>addex</strong> instruction places the sum of the contents of general-purpose register (GPR) <em>RA</em>, the contents of GPR <em>RB</em>, and the overflow bit <em>OV</em> into the target GPR <em>RT</em> when the carry bit <em>CY</em> is 0.</p>
+                    <p>If <em>CY</em> is 0, <em>OV</em> is set to 1 if there is a carry out of bit 0 of the sum in 64-bit mode or if there is a carry out of bit 32 of the sum in 32-bit mode, and set to 0 otherwise. Additionally, <em>OV32</em> is set to 1 if there is a carry out of bit 32 of the sum.</p>
+                `,
+                "tooltip": "Add Extended Using Alternate Carry Bit",
+                "url": powerIsaDocumentation
             };
         case "ADDI":
         case "CAL":
@@ -369,6 +387,16 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Condition Register XOR",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-crxor-condition-register-xor-instruction"
             };
+        case "DARN":
+            return {
+                "html": `
+                    <p>The <strong>darn</strong> instruction places a random number into the target general-purpose register (GPR) <em>RT</em> in a format selected by the value of <em>L</em>.</p>
+                    <p>If <em>L</em> is 0, the random number range is 0 to 0xFFFFFFFF. If <em>L</em> is 1 or 2, the random number range is 0 to 0xFFFFFFFF_FFFFFFFE.</p>
+                    <p>The value 0xFFFFFFFF_FFFFFFFF indicates an error condition.</p>
+                `,
+                "tooltip": "Deliver A Random Number",
+                "url": powerIsaDocumentation
+            };
         case "DCBF":
             return {
                 "html": `<p>The <strong>dcbf</strong> instruction calculates an effective address (EA) by adding the contents of general-purpose register (GPR) <em>RA</em> to the contents of GPR <em>RB</em>. If the <em>RA</em> field is 0, EA is the sum of the contents of <em>RB</em> and 0. If the cache block containing the target storage locations is in the data cache, it is copied back to main storage, provided it is different than the main storage copy.</p>`,
@@ -487,6 +515,36 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 `,
                 "tooltip": "Divide Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-divw-divide-word-instruction"
+            };
+        case "DIVWE":
+        case "DIVWE.":
+        case "DIVWEO":
+        case "DIVWEO.":
+            return {
+                "html": `
+                    <p>The <strong>divwe</strong> instruction performs a signed division of a 64-bit dividend by a 32-bit divisor, placing the 32-bit quotient into the target general-purpose register (GPR) <em>RT</em>. The remainder is not supplied as a result.</p>
+                    <p>The 64-bit dividend is formed by concatenating bits 32-63 of GPR <em>RA</em> with 32 zero bits. The 32-bit divisor is taken from bits 32-63 of GPR <em>RB</em>. If the quotient can be represented in 32 bits, it is placed into bits 32-63 of GPR <em>RT</em>. The contents of bits 0-31 of GPR <em>RT</em> are undefined.</p>
+                    <p>Both the operands and the quotient are interpreted as signed integers. The quotient is the unique signed integer that satisfies the equation: <em>dividend = (quotient × divisor) + remainder</em>, where 0 ≤ remainder < |divisor| if the dividend is nonnegative, and -|divisor| < remainder ≤ 0 if the dividend is negative.</p>
+                    <p>If the quotient cannot be represented in 32 bits, or if an attempt is made to perform the division <em>anything ÷ 0</em>, the contents of GPR <em>RT</em> are undefined. If <em>OE</em> (Overflow Enable) is set to 1, then <em>OV</em> (Overflow) and <em>OV32</em> are set to 1 in these cases.</p>
+                    <p>If the Rc (Record) bit is set to 1, the contents of the <em>LT</em>, <em>GT</em>, and <em>EQ</em> bits of Condition Register Field 0 are undefined if the quotient cannot be represented in 32 bits or if the divisor is zero.</p>
+                `,
+                "tooltip": "Divide Word Extended",
+                "url": powerIsaDocumentation
+            };
+        case "DIVWEU":
+        case "DIVWEU.":
+        case "DIVWEUO":
+        case "DIVWEUO.":
+            return {
+                "html": `
+                    <p>The <strong>divweu</strong> instruction performs an unsigned division of a 64-bit dividend by a 32-bit divisor, placing the 32-bit quotient into the target general-purpose register (GPR) <em>RT</em>. The remainder is not supplied as a result.</p>
+                    <p>The 64-bit dividend is formed by concatenating bits 32-63 of GPR <em>RA</em> with 32 zero bits. The 32-bit divisor is taken from bits 32-63 of GPR <em>RB</em>. If the quotient can be represented in 32 bits, it is placed into bits 32-63 of GPR <em>RT</em>. The contents of bits 0-31 of GPR <em>RT</em> are undefined.</p>
+                    <p>Both the operands and the quotient are interpreted as unsigned integers. The quotient is the unique unsigned integer that satisfies the equation: <em>dividend = (quotient × divisor) + remainder</em>, where 0 ≤ remainder < divisor.</p>
+                    <p>If the value of GPR <em>RA</em> is greater than or equal to the value of GPR <em>RB</em>, or if an attempt is made to perform the division <em>anything ÷ 0</em>, the contents of GPR <em>RT</em> are undefined. If <em>OE</em> (Overflow Enable) is set to 1, then <em>OV</em> (Overflow) and <em>OV32</em> are set to 1 in these cases.</p>
+                    <p>If the <em>Rc</em> (Record) bit is set to 1, the first three bits of Condition Register Field 0 are set by a signed comparison of the result to zero. However, if the quotient cannot be represented in 32 bits or if the divisor is zero, the contents of the <em>LT</em>, <em>GT</em>, and <em>EQ</em> bits of Condition Register Field 0 are undefined.</p>
+                `,
+                "tooltip": "Divide Word Extended Unsigned",
+                "url": powerIsaDocumentation
             };
         case "DIVWU":
         case "DIVWU.":
@@ -1474,6 +1532,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Move from Segment Register Indirect",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-mfsrin-move-from-segment-register-indirect-instruction"
             };
+        case "MODSW":
+            return {
+                "html": `
+                    <p>The <strong>modsw</strong> instruction calculates the signed remainder of a 32-bit dividend divided by a 32-bit divisor, placing the 32-bit remainder into the target general-purpose register (GPR) <em>RT</em>. The quotient is not supplied as a result.</p>
+                    <p>The 32-bit dividend is taken from bits 32-63 of GPR <em>RA</em>, and the 32-bit divisor is taken from bits 32-63 of GPR <em>RB</em>. The 32-bit remainder is placed into bits 32-63 of GPR <em>RT</em>. The contents of bits 0-31 of GPR <em>RT</em> are undefined.</p>
+                    <p>Both the operands and the remainder are interpreted as signed integers. The remainder is the unique signed integer that satisfies the equation: <em>remainder = dividend - (quotient × divisor)</em>, where 0 ≤ remainder < |divisor| if the dividend is nonnegative, and -|divisor| < remainder ≤ 0 if the dividend is negative.</p>
+                    <p>If an attempt is made to perform any of the divisions <code>0x80000000 % -1</code> or <code>&lt;anything&gt; % 0</code>, the contents of GPR <em>RT</em> are undefined.</p>
+                `,
+                "tooltip": "Modulo Signed Word",
+                "url": powerIsaDocumentation
+            };
+        case "MODUW":
+            return {
+                "html": `
+                    <p>The <strong>moduw</strong> instruction calculates the unsigned remainder of a 32-bit dividend divided by a 32-bit divisor, placing the 32-bit remainder into the target general-purpose register (GPR) <em>RT</em>. The quotient is not supplied as a result.</p>
+                    <p>The 32-bit dividend is taken from bits 32-63 of GPR <em>RA</em>, and the 32-bit divisor is taken from bits 32-63 of GPR <em>RB</em>. The 32-bit remainder is placed into bits 32-63 of GPR <em>RT</em>. The contents of bits 0-31 of GPR <em>RT</em> are undefined.</p>
+                    <p>Both the operands and the remainder are interpreted as unsigned integers. The remainder is the unique unsigned integer that satisfies the equation: <em>remainder = dividend - (quotient × divisor)</em>, where 0 ≤ remainder < divisor.</p>
+                    <p>If an attempt is made to perform any division with a divisor of zero, the contents of GPR <em>RT</em> are undefined.</p>
+                `,
+                "tooltip": "Modulo Unsigned Word",
+                "url": powerIsaDocumentation
+            };
         case "MTCRF":
             return {
                 "html": `<p>The <strong>mtcrf</strong> instruction copies the contents of source general-purpose register (GPR) <em>RS</em> into the condition register under the control of field mask <em>FXM</em>.</p>`,
@@ -1659,6 +1739,16 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>oris</strong> and <strong>oriu</strong> instructions logically OR the contents of general-purpose register (GPR) <em>RS</em> with the concatenation of a 16-bit unsigned integer, <em>UI</em>, and x'0000' and store the result in GPR <em>RA</em>.</p>`,
                 "tooltip": "OR Immediate Shifted",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-oris-oriu-immediate-shifted-instruction"
+            };
+        case "PADDI":
+            return {
+                "html": `
+                    <p>The <strong>paddi</strong> instruction places the sum of the contents of general-purpose register (GPR) <em>RA</em> and the 32-bit two's complement integer <em>si0||si1</em>, sign-extended to 64 bits, into the target GPR <em>RT</em>. If GPR <em>RA</em> is GPR 0, then <em>si0||si1</em> is stored into the target GPR <em>RT</em>.</p>
+                    <p>For <strong>paddi</strong> with <em>R</em> equal to 0, the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>si0||si1</em>, sign-extended to 64 bits, is placed into GPR <em>RT</em>. For <strong>paddi</strong> with <em>R</em> equal to 1, the sum of the address of the instruction and the value <em>si0||si1</em>, sign-extended to 64 bits, is placed into GPR <em>RT</em>.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Add Immediate",
+                "url": powerIsaDocumentation
             };
         case "PLBZ":
             return {
