@@ -477,6 +477,36 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Divide Double Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-divd-divide-double-word-instruction"
             };
+        case "DIVDE":
+        case "DIVDE.":
+        case "DIVDEO":
+        case "DIVDEO.":
+            return {
+                "html": `
+                    <p>The <strong>divde</strong> instruction performs a signed division of a 128-bit dividend by a 64-bit divisor, placing the 64-bit quotient into the target general-purpose register (GPR) <em>RT</em>. The remainder is not supplied as a result.</p>
+                    <p>The 128-bit dividend is formed by concatenating the contents of GPR <em>RA</em> with 64 zero bits. The 64-bit divisor is taken from GPR <em>RB</em>. If the quotient can be represented in 64 bits, it is placed into GPR <em>RT</em>.</p>
+                    <p>Both the operands and the quotient are interpreted as signed integers. The quotient is the unique signed integer that satisfies the equation: <em>dividend = (quotient × divisor) + remainder</em>, where 0 ≤ remainder < |divisor| if the dividend is nonnegative, and -|divisor| < remainder ≤ 0 if the dividend is negative.</p>
+                    <p>If the quotient cannot be represented in 64 bits, or if an attempt is made to perform the division <em>anything ÷ 0</em>, the contents of GPR <em>RT</em> are undefined. If <em>OE</em> (Overflow Enable) is set to 1, then <em>OV</em> (Overflow) and <em>OV32</em> are set to 1 in these cases.</p>
+                    <p>If the <em>Rc</em> (Record) bit is set to 1, the contents of the <em>LT</em>, <em>GT</em>, and <em>EQ</em> bits of Condition Register Field 0 are undefined if the quotient cannot be represented in 64 bits or if the divisor is zero.</p>
+                `,
+                "tooltip": "Divide Doubleword Extended",
+                "url": powerIsaDocumentation
+            };
+        case "DIVDEU":
+        case "DIVDEU.":
+        case "DIVDEUO":
+        case "DIVDEUO.":
+            return {
+                "html": `
+                    <p>The <strong>divdeu</strong> instruction performs an unsigned division of a 128-bit dividend by a 64-bit divisor, placing the 64-bit quotient into the target general-purpose register (GPR) <em>RT</em>. The remainder is not supplied as a result.</p>
+                    <p>The 128-bit dividend is formed by concatenating the contents of GPR <em>RA</em> with 64 zero bits. The 64-bit divisor is taken from GPR <em>RB</em>. If the quotient can be represented in 64 bits, it is placed into GPR <em>RT</em>.</p>
+                    <p>Both the operands and the quotient are interpreted as unsigned integers. The quotient is the unique unsigned integer that satisfies the equation: <em>dividend = (quotient × divisor) + remainder</em>, where 0 ≤ remainder < divisor.</p>
+                    <p>If the value of GPR <em>RA</em> is greater than or equal to the value of GPR <em>RB</em>, or if an attempt is made to perform the division <em>anything ÷ 0</em>, the contents of GPR <em>RT</em> are undefined. If <em>OE</em> (Overflow Enable) is set to 1, then <em>OV</em> (Overflow) and <em>OV32</em> are set to 1 in these cases.</p>
+                    <p>If the <em>Rc</em> (Record) bit is set to 1, the first three bits of Condition Register Field 0 are set by a signed comparison of the result to zero. However, if the quotient cannot be represented in 64 bits or if the divisor is zero, the contents of the <em>LT</em>, <em>GT</em>, and <em>EQ</em> bits of Condition Register Field 0 are undefined.</p>
+                `,
+                "tooltip": "Divide Doubleword Extended Unsigned",
+                "url": powerIsaDocumentation
+            };
         case "DIVDU":
         case "DIVDU.":
         case "DIVDUO":
@@ -1433,6 +1463,33 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Load Word and Zero Indexed",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-lwzx-lx-load-word-zero-indexed-instruction"
             };
+        case "MADDHD":
+            return {
+                "html": `
+                    <p>The <strong>maddhd</strong> instruction multiplies two 64-bit signed operands from general-purpose registers (GPR) <em>RA</em> and <em>RB</em>, adds the 64-bit signed operand from GPR <em>RC</em> to the 128-bit product, and places the high-order 64 bits of the resulting 128-bit sum into the target GPR <em>RT</em>.</p>
+                    <p>All three operands and the result are interpreted as signed integers.</p>
+                `,
+                "tooltip": "Multiply-Add High Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MADDHDU":
+            return {
+                "html": `
+                    <p>The <strong>maddhdu</strong> instruction multiplies two 64-bit unsigned operands from general-purpose registers (GPR) <em>RA</em> and <em>RB</em>, adds the 64-bit unsigned operand from GPR <em>RC</em> to the 128-bit product, and places the high-order 64 bits of the resulting 128-bit sum into the target GPR <em>RT</em>.</p>
+                    <p>All three operands and the result are interpreted as unsigned integers.</p>
+                `,
+                "tooltip": "Multiply-Add High Doubleword Unsigned",
+                "url": powerIsaDocumentation
+            };
+        case "MADDLD":
+            return {
+                "html": `
+                    <p>The <strong>maddld</strong> instruction multiplies two 64-bit signed operands from general-purpose registers (GPR) <em>RA</em> and <em>RB</em>, adds the 64-bit signed operand from GPR <em>RC</em> to the 128-bit product, and places the low-order 64 bits of the resulting 128-bit sum into the target GPR <em>RT</em>.</p>
+                    <p>All three operands and the result are interpreted as signed integers.</p>
+                `,
+                "tooltip": "Multiply-Add Low Doubleword",
+                "url": powerIsaDocumentation
+            };
         case "MASKG":
         case "MASKG.":
             return {
@@ -1531,6 +1588,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>mfsrin</strong> instruction copies the contents of segment register (SR), specified by bits 0-3 of the general-purpose register (GPR) <em>RB</em>, into GPR <em>RT</em>.</p>`,
                 "tooltip": "Move from Segment Register Indirect",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-mfsrin-move-from-segment-register-indirect-instruction"
+            };
+        case "MODSD":
+            return {
+                "html": `
+                    <p>The <strong>modsd</strong> instruction calculates the signed remainder of a 64-bit dividend divided by a 64-bit divisor, placing the 64-bit remainder into the target general-purpose register (GPR) <em>RT</em>. The quotient is not supplied as a result.</p>
+                    <p>The 64-bit dividend is taken from GPR <em>RA</em>, and the 64-bit divisor is taken from GPR <em>RB</em>. The 64-bit remainder is placed into GPR <em>RT</em>.</p>
+                    <p>Both the operands and the remainder are interpreted as signed integers. The remainder is the unique signed integer that satisfies the equation: <em>remainder = dividend - (quotient × divisor)</em>, where 0 ≤ remainder < |divisor| if the dividend is nonnegative, and -|divisor| < remainder ≤ 0 if the dividend is negative.</p>
+                    <p>If an attempt is made to perform any of the divisions <code>&lt;anything&gt; % 0</code> or <code>0x8000000000000000 % -1</code>, the contents of GPR <em>RT</em> are undefined.</p>
+                `,
+                "tooltip": "Modulo Signed Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MODUD":
+            return {
+                "html": `
+                    <p>The <strong>modud</strong> instruction calculates the unsigned remainder of a 64-bit dividend divided by a 64-bit divisor, placing the 64-bit remainder into the target general-purpose register (GPR) <em>RT</em>. The quotient is not supplied as a result.</p>
+                    <p>The 64-bit dividend is taken from GPR <em>RA</em>, and the 64-bit divisor is taken from GPR <em>RB</em>. The 64-bit remainder is placed into GPR <em>RT</em>.</p>
+                    <p>Both the operands and the remainder are interpreted as unsigned integers. The remainder is the unique unsigned integer that satisfies the equation: <em>remainder = dividend - (quotient × divisor)</em>, where 0 ≤ remainder < divisor.</p>
+                    <p>If an attempt is made to perform any division with a divisor of zero, the contents of GPR <em>RT</em> are undefined.</p>
+                `,
+                "tooltip": "Modulo Unsigned Doubleword",
+                "url": powerIsaDocumentation
             };
         case "MODSW":
             return {
