@@ -232,6 +232,17 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Branch Conditional Link Register",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-bclr-bcr-branch-conditional-link-register-instruction"
             };
+        case "BCTAR":
+        case "BCTARL":
+            return {
+                "html": `
+                    <p>The <strong>bctar</strong> and <strong>bctarl</strong> instructions branch to the address stored in the Branch Target Address Register (TAR) if a specified condition is met. The condition is determined by the Condition Register (CR) bit specified by <em>BI+32</em> and the BO field.</p>
+                    <p>The <em>BO</em> field is used to resolve the branch as described in the instruction set architecture, and the <em>BH</em> field specifies the context of the branch. The branch target address is formed by concatenating bits 0-61 of the TAR with <code>0b00</code>. In 32-bit mode, the high-order 32 bits of the branch target address are set to 0.</p>
+                    <p>If <em>LK</em> is 1, then the effective address of the instruction following the branch instruction is placed into the Link Register (LR).</p>
+                `,
+                "tooltip": "Branch Conditional to Branch Target Address",
+                "url": ""
+            };
         case "CLCS":
             return {
                 "html": `<p>The <strong>clcs</strong> instruction places the cache line size specified by <em>RA</em> into the target general-purpose register (GPR) <em>RT</em>. The value of <em>RA</em> determines the cache line size returned in GPR <em>RT</em>.</p>`,
