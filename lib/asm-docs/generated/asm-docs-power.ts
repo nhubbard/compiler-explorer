@@ -1,5 +1,9 @@
 import { AssemblyInstructionInfo } from "../base.js";
 
+// The URL to the current revision of the OpenPOWER ISA.
+// There's no way to link to the exact page in the documentation viewer, so the section is noted in the `html` field.
+const powerIsaDocumentation: string = "https://files.openpower.foundation/s/9izgC5Rogi5Ywmm";
+
 // Based on the IBM documentation of assembly instructions for AIX 7.3 (https://www.ibm.com/docs/en/aix/7.3?topic=reference-instruction-set).
 //
 // An automatic generator is available at etc/scripts/docenizers/docenizer-power.py, but it has a lot of quirks and is considered incomplete.
@@ -242,7 +246,7 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                     <p>The instruction is documented on page 78 of the linked PDF file.</p>
                 `,
                 "tooltip": "Branch Conditional to Branch Target Address",
-                "url": "https://files.openpower.foundation/s/9izgC5Rogi5Ywmm"
+                "url": powerIsaDocumentation
             };
         case "CLCS":
             return {
@@ -1633,6 +1637,17 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>oris</strong> and <strong>oriu</strong> instructions logically OR the contents of general-purpose register (GPR) <em>RS</em> with the concatenation of a 16-bit unsigned integer, <em>UI</em>, and x'0000' and store the result in GPR <em>RA</em>.</p>`,
                 "tooltip": "OR Immediate Shifted",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-oris-oriu-immediate-shifted-instruction"
+            };
+        case "PLBZ":
+            return {
+                "html": `
+                    <p>The <strong>plbz</strong> instruction loads a byte in storage addressed by the effective address (EA) into bits 56-63 of the target general-purpose register (GPR) <em>RT</em> and sets bits 0-55 of GPR <em>RT</em> to 0.</p>
+                    <p>For <strong>plbz</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plbz</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                    <p>The <strong>plbz</strong> instruction is documented in section 3.3.1 of the linked PDF.</p>
+                `,
+                "tooltip": "Prefixed Load Byte and Zero",
+                "url": powerIsaDocumentation
             };
         case "POPCNTBD":
             return {
