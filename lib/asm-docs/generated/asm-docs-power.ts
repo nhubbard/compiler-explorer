@@ -1,7 +1,8 @@
 import { AssemblyInstructionInfo } from "../base.js";
 
 // The URL to the current revision of the OpenPOWER ISA.
-// There's no way to link to the exact page in the documentation viewer, so the section is noted in the `html` field.
+// There's no way to link to the exact page in the documentation viewer, as far as I can tell.
+// Eventually, it should be a goal to make a machine-readable version of all the POWER ISA documentation in one staticly-rendered place.
 const powerIsaDocumentation: string = "https://files.openpower.foundation/s/9izgC5Rogi5Ywmm";
 
 // Based on the IBM documentation of assembly instructions for AIX 7.3 (https://www.ibm.com/docs/en/aix/7.3?topic=reference-instruction-set).
@@ -243,7 +244,6 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                     <p>The <strong>bctar</strong> and <strong>bctarl</strong> instructions branch to the address stored in the Branch Target Address Register (TAR) if a specified condition is met. The condition is determined by the Condition Register (CR) bit specified by <em>BI+32</em> and the BO field.</p>
                     <p>The <em>BO</em> field is used to resolve the branch as described in the instruction set architecture, and the <em>BH</em> field specifies the context of the branch. The branch target address is formed by concatenating bits 0-61 of the TAR with <code>0b00</code>. In 32-bit mode, the high-order 32 bits of the branch target address are set to 0.</p>
                     <p>If <em>LK</em> is 1, then the effective address of the instruction following the branch instruction is placed into the Link Register (LR).</p>
-                    <p>The instruction is documented on page 78 of the linked PDF file.</p>
                 `,
                 "tooltip": "Branch Conditional to Branch Target Address",
                 "url": powerIsaDocumentation
@@ -1644,9 +1644,18 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                     <p>The <strong>plbz</strong> instruction loads a byte in storage addressed by the effective address (EA) into bits 56-63 of the target general-purpose register (GPR) <em>RT</em> and sets bits 0-55 of GPR <em>RT</em> to 0.</p>
                     <p>For <strong>plbz</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plbz</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
                     <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
-                    <p>The <strong>plbz</strong> instruction is documented in section 3.3.1 of the linked PDF.</p>
                 `,
                 "tooltip": "Prefixed Load Byte and Zero",
+                "url": powerIsaDocumentation
+            };
+        case "PLHZ":
+            return {
+                "html": `
+                    <p>The <strong>plhz</strong> instruction loads a halfword of data from a specified location in memory, addressed by the effective address (EA), into bits 48-63 of the target general-purpose register (GPR) <em>RT</em> and sets bits 0-47 of GPR <em>RT</em> to 0.</p>
+                    <p>For <strong>plhz</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plhz</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Halfword and Zero",
                 "url": powerIsaDocumentation
             };
         case "POPCNTBD":
