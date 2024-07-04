@@ -92,6 +92,16 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Add Extended Using Alternate Carry Bit",
                 "url": powerIsaDocumentation
             };
+        case "ADDG6S":
+            return {
+                "html": `
+                    <p>The <strong>addg6s</strong> instruction adds a 6-bit signed immediate to the contents of a general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>The immediate value is sign-extended before addition.</p>
+                    <p>This instruction is useful for adding small signed constants to register values.</p>
+                `,
+                "tooltip": "Add 6-bit Signed",
+                "url": powerIsaDocumentation
+            };
         case "ADDI":
         case "CAL":
             return {
@@ -266,6 +276,80 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Branch Conditional to Branch Target Address",
                 "url": powerIsaDocumentation
             };
+        case "BPERMD":
+            return {
+                "html": `
+                    <p>The <strong>bpermd</strong> instruction permutes bits from general-purpose register <em>RB</em> based on the indexes specified in general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Each byte of <em>RS</em> specifies an index for a bit in <em>RB</em> to be placed in <em>RA</em>.</p>
+                    <p>If the index is less than 64, the corresponding bit in <em>RB</em> is placed in <em>RA</em>; otherwise, 0 is placed in <em>RA</em>.</p>
+                    <p>This instruction is useful for bitwise permutation operations.</p>
+                `,
+                "tooltip": "Bit Permute Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "BRH":
+            return {
+                "html": `
+                    <p>The <strong>brh</strong> instruction reverses the order of bytes in each halfword of the doubleword in general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Bits 0-15, 16-31, 32-47, and 48-63 of <em>RS</em> are reversed in <em>RA</em>.</p>
+                    <p>This instruction is useful for byte-order reversal operations on halfwords within a doubleword.</p>
+                `,
+                "tooltip": "Byte Reverse Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "BRW":
+            return {
+                "html": `
+                    <p>The <strong>brw</strong> instruction reverses the order of bytes in each word of the doubleword in general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Bits 0-31 and 32-63 of <em>RS</em> are reversed in <em>RA</em>.</p>
+                    <p>This instruction is useful for byte-order reversal operations on words within a doubleword.</p>
+                `,
+                "tooltip": "Byte Reverse Word",
+                "url": powerIsaDocumentation
+            };
+        case "BRD":
+            return {
+                "html": `
+                    <p>The <strong>brd</strong> instruction reverses the order of bytes in the doubleword in general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Bits 0-63 of <em>RS</em> are reversed in <em>RA</em>.</p>
+                    <p>This instruction is useful for byte-order reversal operations on a doubleword.</p>
+                `,
+                "tooltip": "Byte Reverse Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "CDTBCD":
+            return {
+                "html": `
+                    <p>The <strong>cdtbcd</strong> instruction converts declets in general-purpose register <em>RS</em> to Binary Coded Decimal (BCD) and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Each word in <em>RS</em> contains two declets, which are converted to six 4-bit BCD fields and placed into the corresponding word in <em>RA</em>.</p>
+                    <p>The high-order 8 bits in each word of <em>RA</em> are set to 0.</p>
+                    <p>This instruction is useful for converting declets to BCD format.</p>
+                `,
+                "tooltip": "Convert Declets To Binary Coded Decimal",
+                "url": powerIsaDocumentation
+            };
+        case "CBCDTD":
+            return {
+                "html": `
+                    <p>The <strong>cbcdtd</strong> instruction converts Binary Coded Decimal (BCD) fields in general-purpose register <em>RS</em> to declets and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Each word in <em>RS</em> contains six 4-bit BCD fields, which are converted to two declets and placed into the corresponding word in <em>RA</em>.</p>
+                    <p>The high-order 12 bits in each word of <em>RA</em> are set to 0.</p>
+                    <p>This instruction is useful for converting BCD fields to declets.</p>
+                `,
+                "tooltip": "Convert Binary Coded Decimal To Declets",
+                "url": powerIsaDocumentation
+            };
+        case "CFUGED":
+            return {
+                "html": `
+                    <p>The <strong>cfuged</strong> instruction rearranges the bits in general-purpose register <em>RS</em> based on the mask in general-purpose register <em>RB</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Bits corresponding to 1s in <em>RB</em> are moved to the rightmost bits in <em>RA</em>, and bits corresponding to 0s in <em>RB</em> are moved to the leftmost bits in <em>RA</em>.</p>
+                    <p>The relative order of bits is preserved during the rearrangement.</p>
+                    <p>This instruction is useful for bit rearrangement operations based on a mask.</p>
+                `,
+                "tooltip": "Centrifuge Doubleword",
+                "url": powerIsaDocumentation
+            };
         case "CLCS":
             return {
                 "html": `<p>The <strong>clcs</strong> instruction places the cache line size specified by <em>RA</em> into the target general-purpose register (GPR) <em>RT</em>. The value of <em>RA</em> determines the cache line size returned in GPR <em>RT</em>.</p>`,
@@ -292,6 +376,28 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 `,
                 "tooltip": "Compare",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-cmp-compare-instruction"
+            };
+        case "CMPB":
+            return {
+                "html": `
+                    <p>The <strong>cmpb</strong> instruction compares each byte in general-purpose register <em>RS</em> with the corresponding byte in general-purpose register <em>RB</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>If the bytes are equal, the corresponding byte in <em>RA</em> is set to <code>0xFF</code>.</p>
+                    <p>If the bytes are not equal, the corresponding byte in <em>RA</em> is set to <code>0x00</code>.</p>
+                    <p>This instruction is useful for byte-wise comparisons across registers.</p>
+                `,
+                "tooltip": "Compare Bytes",
+                "url": powerIsaDocumentation
+            };
+        case "CMPEQB":
+            return {
+                "html": `
+                    <p>The <strong>cmpeqb</strong> instruction compares a byte from general-purpose register <em>RA</em> against each byte in general-purpose register <em>RB</em> and sets a bit in Condition Register Field <em>BF</em>.</p>
+                    <p>If any byte in <em>RB</em> matches the byte in <em>RA</em>, a match is indicated in <em>BF</em>.</p>
+                    <p>The result of the comparison determines if the byte in <em>RA</em> matches any byte in <em>RB</em>, and this is reflected in Condition Register Field <em>BF</em>.</p>
+                    <p>This instruction is useful for implementing functions that compare characters to multiple values, such as <em>isspace()</em>.</p>
+                `,
+                "tooltip": "Compare Equal Byte",
+                "url": powerIsaDocumentation
             };
         case "CMPI":
             return {
@@ -320,6 +426,18 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Compare Logical Immediate",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-cmpli-compare-logical-immediate-instruction"
             };
+        case "CMPRB":
+            return {
+                "html": `
+                    <p>The <strong>cmprb</strong> instruction compares a byte from general-purpose register <em>RA</em> against a range of bytes from general-purpose register <em>RB</em> and sets a bit in Condition Register Field <em>BF</em>.</p>
+                    <p>If <em>L</em> is 0, <em>src1</em> is compared against the range defined by the bytes in the upper and lower halves of <em>RB</em>.</p>
+                    <p>If <em>L</em> is 1, <em>src1</em> is compared against two ranges defined by the bytes in <em>RB</em>.</p>
+                    <p>The result of the comparison determines if <em>src1</em> is within the specified range(s), and this is reflected in Condition Register Field <em>BF</em>.</p>
+                    <p>This instruction is useful for implementing character typing functions like <em>isalpha(), isdigit()</em>, etc.</p>
+                `,
+                "tooltip": "Compare Ranged Byte",
+                "url": powerIsaDocumentation
+            };
         case "CNTLZD":
         case "CNTLZD.":
             return {
@@ -330,6 +448,17 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Count Leading Zeros Double Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-cntlzd-count-leading-zeros-double-word-instruction"
             };
+        case "CNTLZDM":
+            return {
+                "html": `
+                    <p>The <strong>cntlzdm</strong> instruction counts the number of contiguous leftmost zero bits in the bits of general-purpose register <em>RS</em> specified by the mask in general-purpose register <em>RB</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>This count is determined by the bits in <em>RS</em> corresponding to bits in <em>RB</em> that are 1.</p>
+                    <p>The result is stored in <em>RA</em> and ranges from 0 to 64, inclusive.</p>
+                    <p>This instruction is useful for counting leading zeros under a specified mask.</p>
+                `,
+                "tooltip": "Count Leading Zeros Doubleword under bit Mask",
+                "url": powerIsaDocumentation
+            };
         case "CNTLZ":
         case "CNTLZ.":
         case "CNTLZW":
@@ -338,6 +467,41 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>cntlzw</strong> and <strong>cntlz</strong> instructions count the number (0 - 32) of consecutive zero bits of the 32 low-order bits of GPR <em>RS</em> and store the result in the target GPR <em>RA</em>.</p>`,
                 "tooltip": "Count Leading Zeros Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-cntlzw-cntlz-count-leading-zeros-word-instruction"
+            };
+        case "CNTTZD":
+        case "CNTTZD.":
+            return {
+                "html": `
+                    <p>The <strong>cnttzd</strong> instruction counts the number of consecutive trailing zero bits in the doubleword of general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>This count ranges from 0 to 64, inclusive.</p>
+                    <p>The result is stored in <em>RA</em>, and if the <em>Rc</em> bit is set, Condition Register Field 0 is updated to reflect the result.</p>
+                    <p>This instruction is useful for finding the position of the first set bit in a doubleword.</p>
+                `,
+                "tooltip": "Count Trailing Zeros Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "CNTTZDM":
+            return {
+                "html": `
+                    <p>The <strong>cnttzdm</strong> instruction counts the number of contiguous rightmost zero bits in the bits of general-purpose register <em>RS</em> specified by the mask in general-purpose register <em>RB</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>This count is determined by the bits in <em>RS</em> corresponding to bits in <em>RB</em> that are 1.</p>
+                    <p>The result is stored in <em>RA</em> and ranges from 0 to 64, inclusive.</p>
+                    <p>This instruction is useful for counting trailing zeros under a specified mask.</p>
+                `,
+                "tooltip": "Count Trailing Zeros Doubleword under bit Mask",
+                "url": powerIsaDocumentation
+            };
+        case "CNTTZW":
+        case "CNTTZW.":
+            return {
+                "html": `
+                    <p>The <strong>cnttzw</strong> instruction counts the number of consecutive trailing zero bits in the rightmost word of general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>This count ranges from 0 to 32, inclusive.</p>
+                    <p>The result is stored in <em>RA</em>, and if the <em>Rc</em> bit is set, Condition Register Field 0 is updated to reflect the result.</p>
+                    <p>This instruction is useful for finding the position of the first set bit in a word.</p>
+                `,
+                "tooltip": "Count Trailing Zeros Word",
+                "url": powerIsaDocumentation
             };
         case "CRAND":
             return {
@@ -640,6 +804,18 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The contents of the low-order 32 bits of general purpose register (GPR) <em>RS</em> are placed into the low-order 32 bits of GPR <em>RA</em>. Bit 32 of GPR <em>RS</em> is used to fill the high-order 32 bits of GPR <em>RA</em>.</p>`,
                 "tooltip": "Extend Sign Word",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-extsw-extend-sign-word-instruction"
+            };
+        case "EXTSWSLI":
+        case "EXTSWSLI.":
+            return {
+                "html": `
+                    <p>The <strong>extswsli</strong> instruction sign-extends the lower 32 bits of general-purpose register <em>RS</em> to 64 bits and shifts the result left by a specified number of bits.</p>
+                    <p>The shifted result is placed into general-purpose register <em>RA</em>.</p>
+                    <p>Bits shifted out are lost, and zeros are filled in the vacated positions.</p>
+                    <p>This instruction is useful for sign-extending and shifting operations.</p>
+                `,
+                "tooltip": "Extend Sign Word and Shift Left Immediate",
+                "url": powerIsaDocumentation
             };
         case "EQV":
         case "EQV.":
@@ -950,11 +1126,42 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Floating Subtract",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-fsqrts-floating-square-root-single-instruction"
             };
+        case "HASHCHK":
+            return {
+                "html": `
+                    <p>The <strong>hashchk</strong> instruction checks a hash value stored in memory at the address specified by the sum of <em>RA</em> and an immediate offset against the value in general-purpose register <em>RB</em>.</p>
+                    <p>If the hash values match, the instruction sets a condition register bit to indicate the match.</p>
+                    <p>This instruction is useful for verifying data integrity and authenticity.</p>
+                `,
+                "tooltip": "Hash Check",
+                "url": powerIsaDocumentation
+            };
+        case "HASHST":
+            return {
+                "html": `
+                    <p>The <strong>hashst</strong> instruction stores a hash value from general-purpose register <em>RB</em> to memory at the address specified by the sum of <em>RA</em> and an immediate offset.</p>
+                    <p>This hash value is useful for certain cryptographic and data integrity operations.</p>
+                    <p>The hash value is stored as a doubleword at the calculated address.</p>
+                `,
+                "tooltip": "Hash Store",
+                "url": powerIsaDocumentation
+            };
         case "ICBI":
             return {
                 "html": `<p>The <strong>icbi</strong> instruction invalidates a block containing the byte addressed in the instruction cache. If <em>RA</em> is not 0, the <strong>icbi</strong> instruction calculates an effective address (EA) by adding the contents of general-purpose register (GPR) <em>RA</em> to the contents of GPR <em>RB</em>.</p>`,
                 "tooltip": "Instruction Cache Block Invalidate",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-icbi-instruction-cache-block-invalidate-instruction"
+            };
+        case "ISEL":
+            return {
+                "html": `
+                    <p>The <strong>isel</strong> instruction selects a value from either general-purpose register <em>RA</em> or <em>RB</em> based on a condition and places it in general-purpose register <em>RT</em>.</p>
+                    <p>The selection is determined by the contents of a bit in the Condition Register specified by <em>BC</em>.</p>
+                    <p>If the condition is met, the value from <em>RA</em> is chosen; otherwise, the value from <em>RB</em> is chosen.</p>
+                    <p>This instruction can be used for conditional selection operations based on Condition Register bits.</p>
+                `,
+                "tooltip": "Integer Select",
+                "url": powerIsaDocumentation
             };
         case "ICS":
         case "ISYNC":
@@ -1589,6 +1796,36 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Move from Segment Register Indirect",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-mfsrin-move-from-segment-register-indirect-instruction"
             };
+        case "MFVSRD":
+            return {
+                "html": `
+                    <p>The <strong>mfvsrd</strong> instruction moves the contents of vector scalar register <em>XS</em> to general-purpose register <em>RA</em>.</p>
+                    <p>The entire doubleword from <em>XS</em> is transferred to <em>RA</em>.</p>
+                    <p>This instruction is useful for transferring data from vector scalar registers to general-purpose registers.</p>
+                `,
+                "tooltip": "Move From Vector Scalar Register Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MFVSRLD":
+            return {
+                "html": `
+                    <p>The <strong>mfvsrld</strong> instruction moves the contents of a doubleword in a vector scalar register <em>XS</em> to general-purpose register <em>RA</em>.</p>
+                    <p>The specified doubleword from <em>XS</em> is transferred to <em>RA</em>.</p>
+                    <p>This instruction is useful for transferring specific doublewords from vector scalar registers to general-purpose registers.</p>
+                `,
+                "tooltip": "Move From Vector Scalar Register Long Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MFVSRWZ":
+            return {
+                "html": `
+                    <p>The <strong>mfvsrwz</strong> instruction moves the contents of the lower word of vector scalar register <em>XS</em> to general-purpose register <em>RA</em> and zeroes the upper word of <em>RA</em>.</p>
+                    <p>The lower word from <em>XS</em> is transferred to <em>RA</em>, and the upper word of <em>RA</em> is set to zero.</p>
+                    <p>This instruction is useful for transferring and zeroing operations involving vector scalar registers and general-purpose registers.</p>
+                `,
+                "tooltip": "Move From Vector Scalar Register Word and Zero",
+                "url": powerIsaDocumentation
+            };
         case "MODSD":
             return {
                 "html": `
@@ -1678,6 +1915,56 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>mtspr</strong> instruction copies the contents of the source general-purpose register <em>RS</em> into the target special-purpose register <em>SPR</em>.</p>`,
                 "tooltip": "Move to Special-Purpose Register",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-mtspr-move-special-purpose-register-instruction"
+            };
+        case "MTVSRD":
+            return {
+                "html": `
+                    <p>The <strong>mtvsrd</strong> instruction moves the contents of general-purpose register <em>RA</em> to vector scalar register <em>XT</em>.</p>
+                    <p>The entire doubleword from <em>RA</em> is transferred to <em>XT</em>.</p>
+                    <p>This instruction is useful for transferring data from general-purpose registers to vector scalar registers.</p>
+                `,
+                "tooltip": "Move To Vector Scalar Register Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MTVSRWA":
+            return {
+                "html": `
+                    <p>The <strong>mtvsrwa</strong> instruction moves the contents of general-purpose register <em>RA</em> to the lower word of vector scalar register <em>XT</em>, zeroes the upper word of <em>XT</em>, and places the result in <em>XT</em>.</p>
+                    <p>The lower word from <em>RA</em> is transferred to the lower word of <em>XT</em>, and the upper word of <em>XT</em> is set to zero.</p>
+                    <p>This instruction is useful for transferring and zeroing operations involving general-purpose registers and vector scalar registers.</p>
+                `,
+                "tooltip": "Move To Vector Scalar Register Word and Zero",
+                "url": powerIsaDocumentation
+            };
+        case "MTVSRWZ":
+            return {
+                "html": `
+                    <p>The <strong>mtvsrwz</strong> instruction moves the contents of general-purpose register <em>RA</em> to the lower word of vector scalar register <em>XT</em> and zeroes the upper word of <em>XT</em>.</p>
+                    <p>The lower word from <em>RA</em> is transferred to <em>XT</em>, and the upper word of <em>XT</em> is set to zero.</p>
+                    <p>This instruction is useful for transferring and zeroing operations involving general-purpose registers and vector scalar registers.</p>
+                `,
+                "tooltip": "Move To Vector Scalar Register Word and Zero",
+                "url": powerIsaDocumentation
+            };
+        case "MTVSRDD":
+            return {
+                "html": `
+                    <p>The <strong>mtvsrdd</strong> instruction moves the contents of general-purpose registers <em>RA</em> and <em>RB</em> to the doubleword of vector scalar register <em>XT</em>.</p>
+                    <p>The contents of <em>RA</em> and <em>RB</em> are transferred to the corresponding parts of <em>XT</em>.</p>
+                    <p>This instruction is useful for transferring doubleword data from general-purpose registers to vector scalar registers.</p>
+                `,
+                "tooltip": "Move To Vector Scalar Register Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "MTVSRWS":
+            return {
+                "html": `
+                    <p>The <strong>mtvsrws</strong> instruction moves the contents of general-purpose register <em>RA</em> to the word of vector scalar register <em>XT</em>.</p>
+                    <p>The contents of <em>RA</em> are transferred to the corresponding word of <em>XT</em>.</p>
+                    <p>This instruction is useful for transferring word data from general-purpose registers to vector scalar registers.</p>
+                `,
+                "tooltip": "Move To Vector Scalar Register Word",
+                "url": powerIsaDocumentation
             };
         case "MUL":
         case "MUL.":
@@ -1829,6 +2116,27 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Add Immediate",
                 "url": powerIsaDocumentation
             };
+        case "PDEPD":
+            return {
+                "html": `
+                    <p>The <strong>pdepd</strong> instruction deposits bits from general-purpose register <em>RS</em> into general-purpose register <em>RA</em> under the control of a mask in general-purpose register <em>RB</em>.</p>
+                    <p>Bits in <em>RS</em> are placed into <em>RA</em> where <em>RB</em> has 1s, in the order from least significant to most significant.</p>
+                    <p>Bits in <em>RA</em> corresponding to 0s in <em>RB</em> are set to 0.</p>
+                    <p>This instruction is useful for depositing specific bits into a register based on a mask.</p>
+                `,
+                "tooltip": "Parallel Bits Deposit Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "PEXTD":
+            return {
+                "html": `
+                    <p>The <strong>pextd</strong> instruction extracts bits from general-purpose register <em>RS</em> based on the mask in general-purpose register <em>RB</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>Bits in <em>RS</em> corresponding to 1s in <em>RB</em> are packed into an n-bit value, which is placed in <em>RA</em>.</p>
+                    <p>This instruction is useful for extracting specific bits from a register based on a mask.</p>
+                `,
+                "tooltip": "Parallel Bits Extract Doubleword",
+                "url": powerIsaDocumentation
+            };
         case "PLBZ":
             return {
                 "html": `
@@ -1904,11 +2212,76 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Load Word and Zero",
                 "url": powerIsaDocumentation
             };
+        case "PNOP":
+            return {
+                "html": `
+                    <p>The <strong>pnop</strong> instruction is a no-operation (NOP) instruction used for synchronization or timing purposes.</p>
+                    <p>It does not perform any action and is used to occupy one instruction cycle.</p>
+                    <p>This instruction is useful for inserting delays or aligning instructions in a pipeline.</p>
+                `,
+                "tooltip": "Processor No Operation",
+                "url": powerIsaDocumentation
+            };
+        case "POPCNTB":
+            return {
+                "html": `
+                    <p>The <strong>popcntb</strong> instruction counts the number of one bits in each byte of general-purpose register <em>RS</em> and places the result in the corresponding byte of general-purpose register <em>RA</em>.</p>
+                    <p>This count ranges from 0 to 8, inclusive.</p>
+                    <p>Each byte in <em>RA</em> will contain the population count of the corresponding byte in <em>RS</em>.</p>
+                    <p>This instruction is useful for bitwise population count operations on a byte level.</p>
+                `,
+                "tooltip": "Population Count Bytes",
+                "url": powerIsaDocumentation
+            };
         case "POPCNTBD":
             return {
                 "html": `<p>The <strong>popcntbd</strong> instruction counts the number of one bits in each byte of register <em>RS</em> and places the count in to the corresponding byte of register <em>RA</em>. The number ranges from 0 to 8, inclusive.</p>`,
                 "tooltip": "Population Count Byte Doubleword",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-popcntbd-population-count-byte-doubleword-instruction"
+            };
+        case "POPCNTD":
+            return {
+                "html": `
+                    <p>The <strong>popcntd</strong> instruction counts the number of one bits in general-purpose register <em>RS</em> and places the result in general-purpose register <em>RA</em>.</p>
+                    <p>This count ranges from 0 to 64, inclusive.</p>
+                    <p><em>RA</em> will contain the population count of the entire doubleword in <em>RS</em>.</p>
+                    <p>This instruction is useful for bitwise population count operations on a doubleword level.</p>
+                `,
+                "tooltip": "Population Count Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "POPCNTW":
+            return {
+                "html": `
+                    <p>The <strong>popcntw</strong> instruction counts the number of one bits in each word of general-purpose register <em>RS</em> and places the result in the corresponding word of general-purpose register <em>RA</em>.</p>
+                    <p>This count ranges from 0 to 32, inclusive.</p>
+                    <p>Each word in <em>RA</em> will contain the population count of the corresponding word in <em>RS</em>.</p>
+                    <p>This instruction is useful for bitwise population count operations on a word level.</p>
+                `,
+                "tooltip": "Population Count Words",
+                "url": powerIsaDocumentation
+            };
+        case "PRTYD":
+            return {
+                "html": `
+                    <p>The <strong>prtyd</strong> instruction examines the least significant bit in each byte of general-purpose register <em>RS</em> and determines if there is an odd number of one bits.</p>
+                    <p>If there is an odd number of one bits, a 1 is placed in general-purpose register <em>RA</em>; otherwise, a 0 is placed.</p>
+                    <p>This is performed for the entire doubleword of <em>RS</em>.</p>
+                    <p>This instruction is useful for calculating the parity of a doubleword in a register.</p>
+                `,
+                "tooltip": "Parity Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "PRTYW":
+            return {
+                "html": `
+                    <p>The <strong>prtyw</strong> instruction examines the least significant bit in each byte of general-purpose register <em>RS</em> and determines if there is an odd number of one bits.</p>
+                    <p>If there is an odd number of one bits, a 1 is placed in the corresponding word of general-purpose register <em>RA</em>; otherwise, a 0 is placed.</p>
+                    <p>This is performed separately for the lower and upper words of <em>RS</em>.</p>
+                    <p>This instruction is useful for calculating the parity of each word in a register.</p>
+                `,
+                "tooltip": "Parity Word",
+                "url": powerIsaDocumentation
             };
         case "PSTB":
             return {
@@ -2109,6 +2482,56 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "html": `<p>The <strong>scv</strong> instruction causes a system call interrupt. The effective address (EA) of the instruction following the <strong>scv</strong> instruction is placed into the Link Register. Bits 0-32, 37-41, and 48-63 of the Machine State Register (MSR) are placed into the corresponding bits of Count Register. Bits 33-36 and 42-47 of the Count Register are set to undefined values.</p>`,
                 "tooltip": "System Call Vectored",
                 "url": "https://www.ibm.com/docs/en/aix/7.3?topic=set-scv-system-call-vectored-instruction"
+            };
+        case "SETB":
+            return {
+                "html": `
+                    <p>The <strong>setb</strong> instruction sets the contents of general-purpose register <em>RT</em> to 1 if the specified condition register field <em>BFA</em> is set.</p>
+                    <p>If <em>BFA</em> is set, <em>RT</em> is set to 1; otherwise, <em>RT</em> is set to 0.</p>
+                    <p>This instruction is useful for setting a register based on a condition register field.</p>
+                `,
+                "tooltip": "Set Boolean",
+                "url": powerIsaDocumentation
+            };
+        case "SETBC":
+            return {
+                "html": `
+                    <p>The <strong>setbc</strong> instruction sets the contents of general-purpose register <em>RT</em> to 1 if the specified condition register bit <em>BI</em> is set.</p>
+                    <p>If <em>BI</em> is set, <em>RT</em> is set to 1; otherwise, <em>RT</em> is set to 0.</p>
+                    <p>This instruction is useful for setting a register based on a condition register bit.</p>
+                `,
+                "tooltip": "Set Boolean Condition",
+                "url": powerIsaDocumentation
+            };
+        case "SETBCR":
+            return {
+                "html": `
+                    <p>The <strong>setbcr</strong> instruction sets the contents of general-purpose register <em>RT</em> to 0 if the specified condition register bit <em>BI</em> is set, and to 1 if it is not set.</p>
+                    <p>If <em>BI</em> is set, <em>RT</em> is set to 0; otherwise, <em>RT</em> is set to 1.</p>
+                    <p>This instruction is useful for setting a register based on the inverse of a condition register bit.</p>
+                `,
+                "tooltip": "Set Boolean Condition Reverse",
+                "url": powerIsaDocumentation
+            };
+        case "SETNBC":
+            return {
+                "html": `
+                    <p>The <strong>setnbc</strong> instruction sets the contents of general-purpose register <em>RT</em> to -1 if the specified condition register bit <em>BI</em> is set, and to 0 if it is not set.</p>
+                    <p>If <em>BI</em> is set, <em>RT</em> is set to -1; otherwise, <em>RT</em> is set to 0.</p>
+                    <p>This instruction is useful for setting a register based on a condition register bit, with a different value for the set state.</p>
+                `,
+                "tooltip": "Set Negative Boolean Condition",
+                "url": powerIsaDocumentation
+            };
+        case "SETNBCR":
+            return {
+                "html": `
+                    <p>The <strong>setnbcr</strong> instruction sets the contents of general-purpose register <em>RT</em> to 0 if the specified condition register bit <em>BI</em> is set, and to -1 if it is not set.</p>
+                    <p>If <em>BI</em> is set, <em>RT</em> is set to 0; otherwise, <em>RT</em> is set to -1.</p>
+                    <p>This instruction is useful for setting a register based on the inverse of a condition register bit, with a different value for the unset state.</p>
+                `,
+                "tooltip": "Set Negative Boolean Condition Reverse",
+                "url": powerIsaDocumentation
             };
         case "SI":
             return {
@@ -3316,9 +3739,9 @@ export function reduceOpcode(opcode: string | undefined): string | undefined {
         case "LIS":
             return "ADDIS";
         // C.10.3: Load Next Instruction Address
-        // This instruction isn't implemented yet.
-        // case "LNIA":
-        //    return "ADDPCIS";
+        case "LNIA":
+        case "SUBPCIS":
+            return "ADDPCIS";
         // C.10.4: Load Address
         case "LA":
             return "ADDI";
@@ -3331,6 +3754,26 @@ export function reduceOpcode(opcode: string | undefined): string | undefined {
         // C.10.7: Move To/From Condition Register
         case "MTCR":
             return "MTCRF";
+        // Other Fixed-Point Extended Mnemonics, as noted in places throughout documentation
+        case "PLA":
+        case "PLI":
+        case "PSUBI":
+            return "PADDI";
+        case "MFFPRD":
+        case "MFVRD":
+            return "MFVSRD";
+        case "MFFPRWZ":
+        case "MFVRWZ":
+            return "MFVSRWZ";
+        case "MTFPRD":
+        case "MTVRD":
+            return "MTVSRD";
+        case "MTFPRWA":
+        case "MTVRWA":
+            return "MTVSRWA";
+        case "MTFPRWZ":
+        case "MTVRWZ":
+            return "MTVSRWZ";
         default:
             return opcode;
     }
