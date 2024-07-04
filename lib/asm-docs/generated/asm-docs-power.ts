@@ -1648,6 +1648,16 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Load Byte and Zero",
                 "url": powerIsaDocumentation
             };
+        case "PLHA":
+            return {
+                "html": `
+                    <p>The <strong>plha</strong> instruction loads a halfword of data from a specified location in memory, addressed by the effective address (EA), into bits 48-63 of the target general-purpose register (GPR) <em>RT</em> and copies bit 0 of the halfword into bits 0-47 of GPR <em>RT</em>.</p>
+                    <p>For <strong>plha</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>plha</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Halfword Algebraic",
+                "url": powerIsaDocumentation
+            };
         case "PLHZ":
             return {
                 "html": `
