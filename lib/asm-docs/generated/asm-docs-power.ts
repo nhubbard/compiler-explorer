@@ -1648,6 +1648,17 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Prefixed Load Byte and Zero",
                 "url": powerIsaDocumentation
             };
+        case "PLD":
+            return {
+                "html": `
+                    <p>The <strong>pld</strong> instruction loads a doubleword in storage from a specified location in memory addressed by the effective address (EA) into the target general-purpose register (GPR) <em>RT</em>.</p>
+                    <p>For <strong>pld</strong> with <em>R</em> equal to 0, the EA is the sum of the contents of GPR <em>RA</em> (or 0 if <em>RA</em> is 0) and the value <em>d0||d1</em>, sign-extended to 64 bits. For <strong>pld</strong> with <em>R</em> equal to 1, the EA is the sum of the address of the instruction and the value <em>d0||d1</em>, sign-extended to 64 bits.</p>
+                    <p>The doubleword in storage addressed by EA is loaded into GPR <em>RT</em>.</p>
+                    <p>If <em>R</em> is equal to 1 and <em>RA</em> is not equal to 0, the instruction form is invalid.</p>
+                `,
+                "tooltip": "Prefixed Load Doubleword",
+                "url": powerIsaDocumentation
+            };
         case "PLHA":
             return {
                 "html": `
