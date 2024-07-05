@@ -4782,6 +4782,153 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Vector Merge Odd Word",
                 "url": powerIsaDocumentation
             };
+        case "VSPLTB":
+            return {
+                "html": `
+                    <p>The <strong>vspltb</strong> instruction splats a byte element from a vector register into all byte elements of a target vector register. The effective address is computed using an immediate value and a source vector register.</p>
+                    <p>The contents of the byte element specified by the immediate value are replicated across all byte elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VSPLTH":
+            return {
+                "html": `
+                    <p>The <strong>vsplth</strong> instruction splats a halfword element from a vector register into all halfword elements of a target vector register. The effective address is computed using an immediate value and a source vector register.</p>
+                    <p>The contents of the halfword element specified by the immediate value are replicated across all halfword elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VSPLTW":
+            return {
+                "html": `
+                    <p>The <strong>vspltw</strong> instruction splats a word element from a vector register into all word elements of a target vector register. The effective address is computed using an immediate value and a source vector register.</p>
+                    <p>The contents of the word element specified by the immediate value are replicated across all word elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Word",
+                "url": powerIsaDocumentation
+            };
+        case "VSPLTISB":
+            return {
+                "html": `
+                    <p>The <strong>vspltisb</strong> instruction splats an immediate signed byte into all byte elements of a target vector register. The immediate value is sign-extended and replicated across all byte elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Immediate Signed Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VSPLTISH":
+            return {
+                "html": `
+                    <p>The <strong>vspltish</strong> instruction splats an immediate signed halfword into all halfword elements of a target vector register. The immediate value is sign-extended and replicated across all halfword elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Immediate Signed Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VSPLTISW":
+            return {
+                "html": `
+                    <p>The <strong>vspltisw</strong> instruction splats an immediate signed word into all word elements of a target vector register. The immediate value is sign-extended and replicated across all word elements in the target vector register.</p>
+                `,
+                "tooltip": "Vector Splat Immediate Signed Word",
+                "url": powerIsaDocumentation
+            };
+        case "VPERM":
+            return {
+                "html": `
+                    <p>The <strong>vperm</strong> instruction permutes bytes from two source vector registers into a target vector register based on a third vector register, known as the permute control vector. The permute control vector specifies the source byte for each byte in the target vector.</p>
+                `,
+                "tooltip": "Vector Permute",
+                "url": powerIsaDocumentation
+            };
+        case "VPERMR":
+            return {
+                "html": `
+                    <p>The <strong>vpermr</strong> instruction permutes bytes from two source vector registers into a target vector register based on a third vector register, known as the permute control vector. The permute control vector specifies the source byte for each byte in the target vector in a right-indexed manner.</p>
+                `,
+                "tooltip": "Vector Permute Right-Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "VSEL":
+            return {
+                "html": `
+                    <p>The <strong>vsel</strong> instruction selects elements from two source vector registers based on a third vector register, known as the selection mask. The result is computed as (src1 & ¬mask) | (src2 & mask), and stored in the target vector register.</p>
+                `,
+                "tooltip": "Vector Select",
+                "url": powerIsaDocumentation
+            };
+        case "VSLDBI":
+            return {
+                "html": `
+                    <p>The <strong>vsldbi</strong> instruction shifts a doubleword left by a specified number of bits, combining two source vector registers into a target vector register. The shift amount is specified as an immediate value.</p>
+                `,
+                "tooltip": "Vector Shift Left Double by Bit Immediate",
+                "url": powerIsaDocumentation
+            };
+        case "VSLDOI":
+            return {
+                "html": `
+                    <p>The <strong>vsldoi</strong> instruction shifts a doubleword left by a specified number of bytes, combining two source vector registers into a target vector register. The shift amount is specified as an immediate value.</p>
+                `,
+                "tooltip": "Vector Shift Left Double by Octet Immediate",
+                "url": powerIsaDocumentation
+            };
+        case "VSRDBI":
+            return {
+                "html": `
+                    <p>The <strong>vsrdbi</strong> instruction shifts a doubleword right by a specified number of bits, combining two source vector registers into a target vector register. The shift amount is specified as an immediate value.</p>
+                `,
+                "tooltip": "Vector Shift Right Double by Bit Immediate",
+                "url": powerIsaDocumentation
+            };
+        case "VSL":
+            return {
+                "html": `
+                    <p>The <strong>vsl</strong> instruction shifts the contents of a vector register left by a specified number of bits, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Left",
+                "url": powerIsaDocumentation
+            };
+        case "VSR":
+            return {
+                "html": `
+                    <p>The <strong>vsr</strong> instruction shifts the contents of a vector register right by a specified number of bits, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Right",
+                "url": powerIsaDocumentation
+            };
+        case "VSLO":
+            return {
+                "html": `
+                    <p>The <strong>vslo</strong> instruction shifts the contents of a vector register left by a specified number of bytes, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Left by Octet",
+                "url": powerIsaDocumentation
+            };
+        case "VSRO":
+            return {
+                "html": `
+                    <p>The <strong>vsro</strong> instruction shifts the contents of a vector register right by a specified number of bytes, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Right by Octet",
+                "url": powerIsaDocumentation
+            };
+        case "VSLV":
+            return {
+                "html": `
+                    <p>The <strong>vslv</strong> instruction shifts the contents of a vector register left by a variable number of bits, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Left Variable",
+                "url": powerIsaDocumentation
+            };
+        case "VSRV":
+            return {
+                "html": `
+                    <p>The <strong>vsrv</strong> instruction shifts the contents of a vector register right by a variable number of bits, where the shift amount is specified in another vector register.</p>
+                `,
+                "tooltip": "Vector Shift Right Variable",
+                "url": powerIsaDocumentation
+            };
     }
 }
 
