@@ -14,7 +14,7 @@ const powerIsaDocumentation: string = 'https://files.openpower.foundation/s/9izg
 // As such, this was created manually to have a complete documentation of the current baseline ISA.
 //
 // There are a *lot* of instructions that have been defined in later versions of the Power ISA that IBM hasn't written documentation for yet.
-// This includes a lot of convenience "extended" instructions, every AltiVec/VMX instruction, and a myriad of other new instructions.
+// This includes a lot of convenience 'extended' instructions, every AltiVec/VMX instruction, and a myriad of other new instructions.
 // If you're up to the significant challenge, feel free to start working through the OpenPOWER ISA manual and start writing proper documentation
 // for the many missing instructions that IBM hasn't documented yet. The latest revision is always available at https://openpowerfoundation.org/specifications/isa/.
 export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInfo | undefined {
@@ -3041,12 +3041,12 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
             return {
                 html: `
                     <p>The <strong>srq</strong> instruction rotates the contents of the source general-purpose register (GPR) <em>RS</em> to the left by 32 minus <em>N</em> bits, where <em>N</em> is the shift amount specified in bits 27-31 of GPR <em>RB</em>, and stores the rotated word in the MQ Register. The mask depends on bit 26 of GPR <em>RB</em>.</p>
-                    <p id="idalangref_srq_instrs__a247dd0c694melh">Consider the following when using the <strong>srq</strong> instruction:</p>
+                    <p>Consider the following when using the <strong>srq</strong> instruction:</p>
                     <ul>
                         <li>If bit 26 of GPR <em>RB</em> is 0, then a mask of <em>N</em> zeros followed by 32 minus <em>N</em> ones is generated.</li>
                         <li>If bit 26 of GPR <em>RB</em> is 1, then a mask of all zeros is generated.</li>
                     </ul>
-                    <p id="idalangref_srq_instrs__a247dd0c824melh">This instruction then stores the logical AND of the rotated word and the generated mask in GPR <em>RA</em>.</p>
+                    <p>This instruction then stores the logical AND of the rotated word and the generated mask in GPR <em>RA</em>.</p>
                 `,
                 tooltip: 'Shift Right with MQ',
                 url: 'https://www.ibm.com/docs/en/aix/7.3?topic=set-srq-shift-right-mq-instruction',
@@ -3665,6 +3665,749 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 html: `<p>The <strong>xoris</strong> and <strong>xoriu</strong> instructions XOR the contents of general-purpose register (GPR) <em>RS</em> with the concatenation of a 16-bit unsigned integer <em>UI</em> and 0x'0000' and store the result in GPR <em>RA</em>.</p>`,
                 tooltip: 'XOR Immediate Shift',
                 url: 'https://www.ibm.com/docs/en/aix/7.3?topic=set-xoris-xoriu-xor-immediate-shift-instruction',
+            };
+        }
+        case 'PLFS': {
+            return {
+                html: `
+                    <p>The <strong>plfs</strong> instruction loads a floating-point single-precision value from memory into a floating-point register, with an effective address calculation depending on the value of <em>R</em>.</p>
+                    <p>If <em>R</em> is 0, the effective address is calculated as the sum of the contents of <em>RA</em> and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>If <em>R</em> is 1, the effective address is calculated as the sum of the instruction address and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>This instruction is useful for loading floating-point single-precision values with an adjustable effective address calculation.</p>
+                `,
+                tooltip: 'Prefixed Load Floating-Point Single',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'PLFD': {
+            return {
+                html: `
+                    <p>The <strong>plfd</strong> instruction loads a floating-point double-precision value from memory into a floating-point register, with an effective address calculation depending on the value of <em>R</em>.</p>
+                    <p>If <em>R</em> is 0, the effective address is calculated as the sum of the contents of <em>RA</em> and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>If <em>R</em> is 1, the effective address is calculated as the sum of the instruction address and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>This instruction is useful for loading floating-point double-precision values with an adjustable effective address calculation.</p>
+                `,
+                tooltip: 'Prefixed Load Floating-Point Double',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'LFIWAX': {
+            return {
+                html: `
+                    <p>The <strong>lfiwax</strong> instruction loads a floating-point register with an integer word from memory, sign-extended to 64 bits, and the effective address is calculated from the sum of the contents of <em>RA</em> and <em>RB</em>.</p>
+                    <p>The word is loaded into the upper half of the floating-point register, and the lower half is filled with a copy of the sign bit.</p>
+                    <p>This instruction is useful for loading integer values into floating-point registers with sign extension.</p>
+                `,
+                tooltip: 'Load Floating-Point as Integer Word Algebraic Indexed',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'LFIWZX': {
+            return {
+                html: `
+                    <p>The <strong>lfiwzx</strong> instruction loads a floating-point register with an integer word from memory, zero-extended to 64 bits, and the effective address is calculated from the sum of the contents of <em>RA</em> and <em>RB</em>.</p>
+                    <p>The word is loaded into the upper half of the floating-point register, and the lower half is set to 0.</p>
+                    <p>This instruction is useful for loading integer values into floating-point registers with zero extension.</p>
+                `,
+                tooltip: 'Load Floating-Point as Integer Word and Zero Indexed',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'PSTFS': {
+            return {
+                html: `
+                    <p>The <strong>pstfs</strong> instruction stores the contents of a floating-point register to memory as a single-precision floating-point value, with an effective address calculation depending on the value of <em>R</em>.</p>
+                    <p>If <em>R</em> is 0, the effective address is calculated as the sum of the contents of <em>RA</em> and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>If <em>R</em> is 1, the effective address is calculated as the sum of the instruction address and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>This instruction is useful for storing floating-point single-precision values with an adjustable effective address calculation.</p>
+                `,
+                tooltip: 'Prefixed Store Floating-Point Single',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'PSTFD': {
+            return {
+                html: `
+                    <p>The <strong>pstfd</strong> instruction stores the contents of a floating-point register to memory as a double-precision floating-point value, with an effective address calculation depending on the value of <em>R</em>.</p>
+                    <p>If <em>R</em> is 0, the effective address is calculated as the sum of the contents of <em>RA</em> and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>If <em>R</em> is 1, the effective address is calculated as the sum of the instruction address and the concatenated immediate values <em>d0</em> and <em>d1</em>.</p>
+                    <p>This instruction is useful for storing floating-point double-precision values with an adjustable effective address calculation.</p>
+                `,
+                tooltip: 'Prefixed Store Floating-Point Double',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'LFDP': {
+            return {
+                html: `
+                    <p>The <strong>lfdp</strong> instruction loads an even-odd pair of floating-point registers with two consecutive double-precision floating-point values from memory.</p>
+                    <p>The effective address is calculated as the sum of the contents of <em>RA</em> and a sign-extended immediate value <em>DS</em>.</p>
+                    <p>The first doubleword is loaded into the even-numbered register, and the second doubleword is loaded into the odd-numbered register.</p>
+                    <p>This instruction is useful for loading pairs of double-precision floating-point values.</p>
+                `,
+                tooltip: 'Load Floating-Point Double Pair',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'LFDPX': {
+            return {
+                html: `
+                    <p>The <strong>lfdpx</strong> instruction loads an even-odd pair of floating-point registers with two consecutive double-precision floating-point values from memory, using an effective address calculated as the sum of the contents of <em>RA</em> and <em>RB</em>.</p>
+                    <p>The first doubleword is loaded into the even-numbered register, and the second doubleword is loaded into the odd-numbered register.</p>
+                    <p>This instruction is useful for loading pairs of double-precision floating-point values using indexed addressing.</p>
+                `,
+                tooltip: 'Load Floating-Point Double Pair Indexed',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'STFDP': {
+            return {
+                html: `
+                    <p>The <strong>stfdp</strong> instruction stores the contents of an even-odd pair of floating-point registers to two consecutive double-precision floating-point values in memory.</p>
+                    <p>The effective address is calculated as the sum of the contents of <em>RA</em> and a sign-extended immediate value <em>DS</em>.</p>
+                    <p>The even-numbered register is stored to the first doubleword, and the odd-numbered register is stored to the second doubleword.</p>
+                    <p>This instruction is useful for storing pairs of double-precision floating-point values.</p>
+                `,
+                tooltip: 'Store Floating-Point Double Pair',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'STFDPX': {
+            return {
+                html: `
+                    <p>The <strong>stfdpx</strong> instruction stores the contents of an even-odd pair of floating-point registers to two consecutive double-precision floating-point values in memory, using an effective address calculated as the sum of the contents of <em>RA</em> and <em>RB</em>.</p>
+                    <p>The even-numbered register is stored to the first doubleword, and the odd-numbered register is stored to the second doubleword.</p>
+                    <p>This instruction is useful for storing pairs of double-precision floating-point values using indexed addressing.</p>
+                `,
+                tooltip: 'Store Floating-Point Double Pair Indexed',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCPSGN':
+        case 'FCPSGN.': {
+            return {
+                html: `
+                    <p>The <strong>fcpsgn</strong> instruction copies the sign of the source floating-point register to the target floating-point register while keeping the magnitude of the target unchanged.</p>
+                    <p>This instruction is useful for operations where the sign of a floating-point value needs to be altered without affecting its magnitude.</p>
+                `,
+                tooltip: 'Floating-Point Copy Sign',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FMRGEW': {
+            return {
+                html: `
+                    <p>The <strong>fmrgew</strong> instruction merges the even words of two floating-point registers into the target floating-point register.</p>
+                    <p>The even word from the source register is copied to the corresponding position in the target register.</p>
+                    <p>This instruction is useful for combining the even words of two floating-point values.</p>
+                `,
+                tooltip: 'Floating-Point Merge Even Word',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FMRGOW':
+            return {
+                html: `
+                    <p>The <strong>fmrgow</strong> instruction merges the odd words of two floating-point registers into the target floating-point register.</p>
+                    <p>The odd word from the source register is copied to the corresponding position in the target register.</p>
+                    <p>This instruction is useful for combining the odd words of two floating-point values.</p>
+                `,
+                tooltip: 'Floating-Point Merge Odd Word',
+                url: powerIsaDocumentation
+            };
+        case 'FTDIV': {
+            return {
+                html: `
+                    <p>The <strong>ftdiv</strong> instruction performs a test for software divide by examining the exponents and other properties of the floating-point operands in registers <em>FRA</em> and <em>FRB</em>.</p>
+                    <p>This instruction sets specific flags based on conditions such as NaN, infinity, and zero values, facilitating efficient software divide operations.</p>
+                `,
+                tooltip: 'Floating Test Divide',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FTSQRT': {
+            return {
+                html: `
+                    <p>The <strong>ftsqrt</strong> instruction performs a test for software square root by examining the exponent and other properties of the floating-point operand in register <em>FRB</em>.</p>
+                    <p>This instruction sets specific flags based on conditions such as NaN, infinity, and negative values, facilitating efficient software square root operations.</p>
+                `,
+                tooltip: 'Floating Test Square Root',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCTIDU':
+        case 'FCTIDU.': {
+            return {
+                html: `
+                    <p>The <strong>fctidu</strong> instruction converts a double-precision floating-point value to an unsigned doubleword integer with rounding.</p>
+                    <p>If the source value is a NaN, the result is set to zero, and specific exception flags are set.</p>
+                    <p>This instruction is useful for converting floating-point values to unsigned integers with rounding.</p>
+                `,
+                tooltip: 'Floating Convert to Unsigned Doubleword Integer with Round',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCTIDUZ':
+        case 'FCTIDUZ.': {
+            return {
+                html: `
+                    <p>The <strong>fctiduz</strong> instruction converts a double-precision floating-point value to an unsigned doubleword integer with truncation towards zero.</p>
+                    <p>If the source value is a NaN, the result is set to zero, and specific exception flags are set.</p>
+                    <p>This instruction is useful for converting floating-point values to unsigned integers with truncation.</p>
+                `,
+                tooltip: 'Floating Convert to Unsigned Doubleword Integer with Round toward Zero',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCTIWU':
+        case 'FCTIWU.': {
+            return {
+                html: `
+                    <p>The <strong>fctiwu</strong> instruction converts a double-precision floating-point value to an unsigned word integer with rounding.</p>
+                    <p>If the source value is a NaN, the result is set to zero, and specific exception flags are set.</p>
+                    <p>This instruction is useful for converting floating-point values to unsigned integers with rounding.</p>
+                `,
+                tooltip: 'Floating Convert to Unsigned Word Integer with Round',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCTIWUZ':
+        case 'FCTIWUZ.': {
+            return {
+                html: `
+                    <p>The <strong>fctiwuz</strong> instruction converts a double-precision floating-point value to an unsigned word integer with truncation towards zero.</p>
+                    <p>If the source value is a NaN, the result is set to zero, and specific exception flags are set.</p>
+                    <p>This instruction is useful for converting floating-point values to unsigned integers with truncation.</p>
+                `,
+                tooltip: 'Floating Convert to Unsigned Word Integer with Round toward Zero',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCFIDU':
+        case 'FCFIDU.': {
+            return {
+                html: `
+                    <p>The <strong>fcfidu</strong> instruction converts an unsigned doubleword integer to a double-precision floating-point value.</p>
+                    <p>The conversion result is rounded to the nearest representable floating-point value.</p>
+                    <p>This instruction is useful for converting unsigned integers to double-precision floating-point values.</p>
+                `,
+                tooltip: 'Floating Convert with Round Unsigned Doubleword to Double-Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCFIDS':
+        case 'FCFIDS.': {
+            return {
+                html: `
+                    <p>The <strong>fcfids</strong> instruction converts a signed doubleword integer to a single-precision floating-point value.</p>
+                    <p>The conversion result is rounded to the nearest representable single-precision floating-point value.</p>
+                    <p>This instruction is useful for converting signed integers to single-precision floating-point values.</p>
+                `,
+                tooltip: 'Floating Convert from Signed Doubleword to Single-Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FCFIDUS':
+        case 'FCFIDUS.': {
+            return {
+                html: `
+                    <p>The <strong>fcfidus</strong> instruction converts an unsigned doubleword integer to a single-precision floating-point value.</p>
+                    <p>The conversion result is rounded to the nearest representable single-precision floating-point value.</p>
+                    <p>This instruction is useful for converting unsigned integers to single-precision floating-point values.</p>
+                `,
+                tooltip: 'Floating Convert from Unsigned Doubleword to Single-Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FRIN':
+        case 'FRIN.': {
+            return {
+                html: `
+                    <p>The <strong>frin</strong> instruction rounds a floating-point value to the nearest integer value.</p>
+                    <p>The result is placed into the target floating-point register.</p>
+                    <p>This instruction is useful for rounding floating-point values to the nearest integer.</p>
+                `,
+                tooltip: 'Floating Round to Integer Nearest',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FRIZ':
+        case 'FRIZ.': {
+            return {
+                html: `
+                    <p>The <strong>friz</strong> instruction rounds a floating-point value to the nearest integer value towards zero.</p>
+                    <p>The result is placed into the target floating-point register.</p>
+                    <p>This instruction is useful for rounding floating-point values towards zero.</p>
+                `,
+                tooltip: 'Floating Round to Integer Toward Zero',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FRIP':
+        case 'FRIP.': {
+            return {
+                html: `
+                    <p>The <strong>frip</strong> instruction rounds a floating-point value to the nearest integer value towards positive infinity.</p>
+                    <p>The result is placed into the target floating-point register.</p>
+                    <p>This instruction is useful for rounding floating-point values towards positive infinity.</p>
+                `,
+                tooltip: 'Floating Round to Integer Plus',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'FRIM':
+        case 'FRIM.': {
+            return {
+                html: `
+                    <p>The <strong>frim</strong> instruction rounds a floating-point value to the nearest integer value towards negative infinity.</p>
+                    <p>The result is placed into the target floating-point register.</p>
+                    <p>This instruction is useful for rounding floating-point values towards negative infinity.</p>
+                `,
+                tooltip: 'Floating Round to Integer Minus',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSCE': {
+            return {
+                html: `
+                    <p>The <strong>mffsce</strong> instruction moves the contents of the floating-point status and control register (FPSCR) to a general-purpose register and clears the exception enables.</p>
+                    <p>This instruction is useful for synchronizing the floating-point status and control register.</p>
+                `,
+                tooltip: 'Move From FPSCR and Clear Enables',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSCDRN': {
+            return {
+                html: `
+                    <p>The <strong>mffscdrn</strong> instruction moves the contents of the control bits in the FPSCR to a general-purpose register and sets the dynamic rounding mode (DRN) field from another general-purpose register.</p>
+                    <p>This instruction is useful for reading and modifying the dynamic rounding mode in the FPSCR.</p>
+                `,
+                tooltip: 'Move From FPSCR Control and Set DRN',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSCDRNI': {
+            return {
+                html: `
+                    <p>The <strong>mffscdrni</strong> instruction moves the contents of the control bits in the FPSCR to a general-purpose register and sets the DRN field from an immediate value.</p>
+                    <p>This instruction is useful for reading and modifying the dynamic rounding mode in the FPSCR using an immediate value.</p>
+                `,
+                tooltip: 'Move From FPSCR Control and Set DRN Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSCRN': {
+            return {
+                html: `
+                    <p>The <strong>mffscrn</strong> instruction moves the contents of the control bits in the FPSCR to a general-purpose register and sets the rounding mode (RN) field from another general-purpose register.</p>
+                    <p>This instruction is useful for reading and modifying the rounding mode in the FPSCR.</p>
+                `,
+                tooltip: 'Move From FPSCR Control and Set RN',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSCRNI': {
+            return {
+                html: `
+                    <p>The <strong>mffscrni</strong> instruction moves the contents of the control bits in the FPSCR to a general-purpose register and sets the rounding mode (RN) field from an immediate value.</p>
+                    <p>This instruction is useful for reading and modifying the rounding mode in the FPSCR using an immediate value.</p>
+                `,
+                tooltip: 'Move From FPSCR Control and Set RN Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'MFFSL': {
+            return {
+                html: `
+                    <p>The <strong>mffsl</strong> instruction moves the contents of the control bits and the non-sticky status bits in the FPSCR to a general-purpose register.</p>
+                    <p>This instruction is useful for reading the control and non-sticky status bits in the FPSCR.</p>
+                `,
+                tooltip: 'Move From FPSCR Lightweight',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DADD':
+        case 'DADD.':
+        case 'DADDQ':
+        case 'DADDQ.': {
+            return {
+                html: `
+                    <p>The <strong>dadd</strong> instruction adds two decimal floating-point operands from the specified registers and stores the result in the target register.</p>
+                    <p>The result is rounded according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for performing decimal floating-point addition operations.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Add',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DSUB':
+        case 'DSUB.':
+        case 'DSUBQ':
+        case 'DSUBQ.': {
+            return {
+                html: `
+                    <p>The <strong>dsub</strong> instruction subtracts the second decimal floating-point operand from the first and stores the result in the target register.</p>
+                    <p>The result is rounded according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for performing decimal floating-point subtraction operations.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Subtract',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DMUL':
+        case 'DMUL.':
+        case 'DMULQ':
+        case 'DMULQ.': {
+            return {
+                html: `
+                    <p>The <strong>dmul</strong> instruction multiplies two decimal floating-point operands from the specified registers and stores the result in the target register.</p>
+                    <p>The result is rounded according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for performing decimal floating-point multiplication operations.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Multiply',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DDIV':
+        case 'DDIV.':
+        case 'DDIVQ':
+        case 'DDIVQ.': {
+            return {
+                html: `
+                    <p>The <strong>ddiv</strong> instruction divides the first decimal floating-point operand by the second and stores the result in the target register.</p>
+                    <p>The result is rounded according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for performing decimal floating-point division operations.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Divide',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCMPU':
+        case 'DCMPUQ': {
+            return {
+                html: `
+                    <p>The <strong>dcmpu</strong> instruction compares two unordered decimal floating-point operands and sets the condition register based on the result.</p>
+                    <p>The comparison does not consider the order of the operands.</p>
+                    <p>This instruction is useful for performing unordered comparisons of decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Compare Unordered',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCMPO':
+        case 'DCMPOQ': {
+            return {
+                html: `
+                    <p>The <strong>dcmps</strong> instruction compares two ordered decimal floating-point operands and sets the condition register based on the result.</p>
+                    <p>The comparison considers the order of the operands.</p>
+                    <p>This instruction is useful for performing ordered comparisons of decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Compare Ordered',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DTSTDC':
+        case 'DTSTDCQ': {
+            return {
+                html: `
+                    <p>The <strong>dtstdc</strong> instruction tests the data class of a decimal floating-point operand against a specified data class mask and sets the condition register based on the result.</p>
+                    <p>This instruction is useful for classifying decimal floating-point values based on their data class.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Test Data Class',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DTSTDG':
+        case 'DTSTDGQ': {
+            return {
+                html: `
+                    <p>The <strong>dtstdg</strong> instruction tests the data group of a decimal floating-point operand against a specified data group mask and sets the condition register based on the result.</p>
+                    <p>This instruction is useful for classifying decimal floating-point values based on their data group.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Test Data Group',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DTSTEX':
+        case 'DTSTEXQ': {
+            return {
+                html: `
+                    <p>The <strong>dtstex</strong> instruction tests the exponent of a decimal floating-point operand against the exponent of another operand and sets the condition register based on the result.</p>
+                    <p>This instruction is useful for comparing the exponents of decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Test Exponent',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DTSTSF':
+        case 'DTSTSFQ': {
+            return {
+                html: `
+                    <p>The <strong>dtstsf</strong> instruction tests the significance of a decimal floating-point operand against another operand and sets the condition register based on the result.</p>
+                    <p>This instruction is useful for comparing the significance of decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Test Significance',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DTSTSFI':
+        case 'DTSTSFIQ': {
+            return {
+                html: `
+                    <p>The <strong>dtstsfi</strong> instruction tests the significance of a decimal floating-point operand against an immediate value and sets the condition register based on the result.</p>
+                    <p>This instruction is useful for comparing the significance of decimal floating-point values against immediate values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Test Significance Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DQUAI':
+        case 'DQUAI.':
+        case 'DQUAIQ':
+        case 'DQUAIQ.': {
+            return {
+                html: `
+                    <p>The <strong>dquai</strong> instruction performs a decimal floating-point quantize operation with an immediate rounding mode and stores the result in the target register.</p>
+                    <p>The result is quantized according to the immediate rounding mode specified in the instruction.</p>
+                    <p>This instruction is useful for quantizing decimal floating-point values with an immediate rounding mode.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Quantize Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DQUA':
+        case 'DQUA.':
+        case 'DQUAQ':
+        case 'DQUAQ.': {
+            return {
+                html: `
+                    <p>The <strong>dquaq</strong> instruction performs a quad-precision decimal floating-point quantize operation with an immediate rounding mode and stores the result in the target register pair.</p>
+                    <p>The result is quantized according to the immediate rounding mode specified in the instruction.</p>
+                    <p>This instruction is useful for quantizing quad-precision decimal floating-point values with an immediate rounding mode.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Quantize Quad Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DRRND':
+        case 'DRRND.':
+        case 'DRRNDQ':
+        case 'DRRNDQ.': {
+            return {
+                html: `
+                    <p>The <strong>drrnd</strong> instruction rounds a decimal floating-point value to the nearest integer value and stores the result in the target register.</p>
+                    <p>The rounding mode is determined by the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for rounding decimal floating-point values to the nearest integer.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Round',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DRINTX':
+        case 'DRINTX.':
+        case 'DRINTXQ':
+        case 'DRINTXQ.': {
+            return {
+                html: `
+                    <p>The <strong>drintx</strong> instruction rounds a decimal floating-point value towards zero and stores the result in the target register.</p>
+                    <p>The rounding mode is determined by the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for rounding decimal floating-point values towards zero.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Round to Integer Towards Zero',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DRINTN':
+        case 'DRINTN.':
+        case 'DRINTNQ':
+        case 'DRINTNQ.': {
+            return {
+                html: `
+                    <p>The <strong>drintn</strong> instruction rounds a decimal floating-point value to the nearest integer value and stores the result in the target register.</p>
+                    <p>The rounding mode is determined by the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for rounding decimal floating-point values to the nearest integer.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Round to Integer Nearest',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCTDP':
+        case 'DCTDP.': {
+            return {
+                html: `
+                    <p>The <strong>dctdp</strong> instruction converts a decimal floating-point value to a binary double-precision floating-point value and stores the result in the target register.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting decimal floating-point values to binary double-precision floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert to Double-Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCTQPQ':
+        case 'DCTQPQ.': {
+            return {
+                html: `
+                    <p>The <strong>dctqpq</strong> instruction converts a quad-precision decimal floating-point value to a quad-precision binary floating-point value and stores the result in the target register pair.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting quad-precision decimal floating-point values to quad-precision binary floating-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert Quad-Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DRSP':
+        case 'DRSP.': {
+            return {
+                html: `
+                    <p>The <strong>drsp</strong> instruction rounds a decimal floating-point value to a specified precision and stores the result in the target register.</p>
+                    <p>The rounding mode is determined by the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for rounding decimal floating-point values to a specified precision.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Round to Specified Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DRDPQ':
+        case 'DRDPQ.': {
+            return {
+                html: `
+                    <p>The <strong>drdpq</strong> instruction rounds a quad-precision decimal floating-point value to a specified precision and stores the result in the target register pair.</p>
+                    <p>The rounding mode is determined by the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for rounding quad-precision decimal floating-point values to a specified precision.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Round Quad to Specified Precision',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCFFIX':
+        case 'DCFFIX.':
+        case 'DCFFIXQ':
+        case 'DCFFIXQ.': {
+            return {
+                html: `
+                    <p>The <strong>dcffix</strong> instruction converts a decimal floating-point value to a fixed-point value and stores the result in the target register.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting decimal floating-point values to fixed-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert to Fixed-Point',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCFFIXQQ': {
+            return {
+                html: `
+                    <p>The <strong>dcffixqq</strong> instruction converts a quad-precision decimal floating-point value to a fixed-point value and stores the result in the target register pair.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting quad-precision decimal floating-point values to fixed-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert Quad to Fixed-Point',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCTFIX':
+        case 'DCTFIX.':
+        case 'DCTFIXQ':
+        case 'DCTFIXQ.': {
+            return {
+                html: `
+                    <p>The <strong>dctfix</strong> instruction converts a decimal floating-point value to a fixed-point value and stores the result in the target register.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting decimal floating-point values to fixed-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert to Fixed-Point',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DCTFIXQQ': {
+            return {
+                html: `
+                    <p>The <strong>dctfixqq</strong> instruction converts a quad-precision decimal floating-point value to a fixed-point value and stores the result in the target register pair.</p>
+                    <p>The conversion is performed according to the rounding mode specified in the FPSCR.</p>
+                    <p>This instruction is useful for converting quad-precision decimal floating-point values to fixed-point values.</p>
+                `,
+                tooltip: 'Decimal Floating-Point Convert Quad to Fixed-Point',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DDEDPD':
+        case 'DDEDPD.':
+        case 'DDEDPDQ':
+        case 'DDEDPDQ.': {
+            return {
+                html: `
+                    <p>The <strong>ddedpd</strong> instruction converts a decimal floating-point value from DPD (densely packed decimal) format to BCD (binary-coded decimal) format and stores the result in the target register.</p>
+                    <p>This instruction is useful for converting decimal floating-point values between different representations.</p>
+                `,
+                tooltip: 'Decimal DPD to BCD Conversion',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DENBCD':
+        case 'DENBCD.':
+        case 'DENBCDQ':
+        case 'DENBCDQ.': {
+            return {
+                html: `
+                    <p>The <strong>denbcd</strong> instruction converts a decimal floating-point value from BCD (binary-coded decimal) format to DPD (densely packed decimal) format and stores the result in the target register.</p>
+                    <p>This instruction is useful for converting decimal floating-point values between different representations.</p>
+                `,
+                tooltip: 'Decimal BCD to DPD Conversion',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DXEX':
+        case 'DXEX.':
+        case 'DXEXQ':
+        case 'DXEXQ.': {
+            return {
+                html: `
+                    <p>The <strong>dxex</strong> instruction extracts the exponent from a decimal floating-point value and stores the result in the target register.</p>
+                    <p>This instruction is useful for extracting the exponent from decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Extract Exponent',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DIEX':
+        case 'DIEX.':
+        case 'DIEXQ':
+        case 'DIEXQ.': {
+            return {
+                html: `
+                    <p>The <strong>diex</strong> instruction extracts the significand from a decimal floating-point value and stores the result in the target register.</p>
+                    <p>This instruction is useful for extracting the significand from decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Extract Significand',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DSCLI':
+        case 'DSCLI.':
+        case 'DSCLIQ':
+        case 'DSCLIQ.': {
+            return {
+                html: `
+                    <p>The <strong>dscli</strong> instruction performs a left shift operation on a decimal floating-point value and stores the result in the target register.</p>
+                    <p>The shift amount is specified as an immediate value.</p>
+                    <p>This instruction is useful for performing left shift operations on decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Shift Left Immediate',
+                url: powerIsaDocumentation
+            };
+        }
+        case 'DSCRI':
+        case 'DSCRI.':
+        case 'DSCRIQ':
+        case 'DSCRIQ.': {
+            return {
+                html: `
+                    <p>The <strong>dscri</strong> instruction performs a right shift operation on a decimal floating-point value and stores the result in the target register.</p>
+                    <p>The shift amount is specified as an immediate value.</p>
+                    <p>This instruction is useful for performing right shift operations on decimal floating-point values.</p>
+                `,
+                tooltip: 'Decimal Shift Right Immediate',
+                url: powerIsaDocumentation
             };
         }
     }
