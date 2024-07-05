@@ -5241,6 +5241,276 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Vector Insert Word with Reverse Index and Hint",
                 "url": powerIsaDocumentation
             };
+        case "VADDCUW":
+            return {
+                "html": `
+                    <p>The <strong>vaddcuw</strong> instruction adds the unsigned integer value in word elements of two source vector registers and writes the carry-out to the target vector register.</p>
+                    <p>Each word element addition is performed independently, and the carry-out is placed into the corresponding word element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Add and Write Carry-out Unsigned Word",
+                "url": powerIsaDocumentation
+            };
+        case "VADDSBS":
+            return {
+                "html": `
+                    <p>The <strong>vaddsbs</strong> instruction adds signed byte elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each byte element addition is clamped to the maximum or minimum value representable by a signed byte if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Signed Byte Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDSHS":
+            return {
+                "html": `
+                    <p>The <strong>vaddshs</strong> instruction adds signed halfword elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each halfword element addition is clamped to the maximum or minimum value representable by a signed halfword if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Signed Halfword Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDSWS":
+            return {
+                "html": `
+                    <p>The <strong>vaddsws</strong> instruction adds signed word elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each word element addition is clamped to the maximum or minimum value representable by a signed word if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Signed Word Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUBM":
+            return {
+                "html": `
+                    <p>The <strong>vaddubm</strong> instruction adds unsigned byte elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each byte element addition wraps around on overflow, retaining only the lower 8 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Byte Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUHM":
+            return {
+                "html": `
+                    <p>The <strong>vadduhm</strong> instruction adds unsigned halfword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each halfword element addition wraps around on overflow, retaining only the lower 16 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Halfword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUWM":
+            return {
+                "html": `
+                    <p>The <strong>vadduwm</strong> instruction adds unsigned word elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each word element addition wraps around on overflow, retaining only the lower 32 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Word Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUDM":
+            return {
+                "html": `
+                    <p>The <strong>vaddudm</strong> instruction adds unsigned doubleword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each doubleword element addition wraps around on overflow, retaining only the lower 64 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Doubleword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUBS":
+            return {
+                "html": `
+                    <p>The <strong>vaddubs</strong> instruction adds unsigned byte elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each byte element addition is clamped to the maximum value representable by an unsigned byte if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Byte Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUHS":
+            return {
+                "html": `
+                    <p>The <strong>vadduhs</strong> instruction adds unsigned halfword elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each halfword element addition is clamped to the maximum value representable by an unsigned halfword if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Halfword Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUWS":
+            return {
+                "html": `
+                    <p>The <strong>vadduws</strong> instruction adds unsigned word elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each word element addition is clamped to the maximum value representable by an unsigned word if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Word Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VADDUQM":
+            return {
+                "html": `
+                    <p>The <strong>vadduqm</strong> instruction adds unsigned quadword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each quadword element addition wraps around on overflow, retaining only the lower 128 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Unsigned Quadword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDEUQM":
+            return {
+                "html": `
+                    <p>The <strong>vaddeuqm</strong> instruction adds unsigned quadword elements from two source vector registers, along with an extended carry-in from a third vector register, with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each quadword element addition includes a carry-in bit and wraps around on overflow, retaining only the lower 128 bits of the result.</p>
+                `,
+                "tooltip": "Vector Add Extended Unsigned Quadword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VADDCUQ":
+            return {
+                "html": `
+                    <p>The <strong>vaddcuq</strong> instruction adds unsigned quadword elements from two source vector registers and writes the carry-out to the target vector register.</p>
+                    <p>Each quadword element addition is performed independently, and the carry-out is placed into the corresponding quadword element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Add and Write Carry-out Unsigned Quadword",
+                "url": powerIsaDocumentation
+            };
+        case "VADDECUQ":
+            return {
+                "html": `
+                    <p>The <strong>vaddecuq</strong> instruction adds unsigned quadword elements from two source vector registers, along with an extended carry-in from a third vector register, and writes the carry-out to the target vector register.</p>
+                    <p>Each quadword element addition includes a carry-in bit, and the carry-out is placed into the corresponding quadword element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Add Extended and Write Carry-out Unsigned Quadword",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBCUW":
+            return {
+                "html": `
+                    <p>The <strong>vsubcuw</strong> instruction subtracts unsigned word elements in two source vector registers and writes the carry-out to the target vector register.</p>
+                    <p>Each word element subtraction is performed independently, and the carry-out is placed into the corresponding word element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Subtract and Write Carry-out Unsigned Word",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBSBS":
+            return {
+                "html": `
+                    <p>The <strong>vsubsbs</strong> instruction subtracts signed byte elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each byte element subtraction is clamped to the maximum or minimum value representable by a signed byte if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Signed Byte Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBSHS":
+            return {
+                "html": `
+                    <p>The <strong>vsubshs</strong> instruction subtracts signed halfword elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each halfword element subtraction is clamped to the maximum or minimum value representable by a signed halfword if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Signed Halfword Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBSWS":
+            return {
+                "html": `
+                    <p>The <strong>vsubsws</strong> instruction subtracts signed word elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each word element subtraction is clamped to the maximum or minimum value representable by a signed word if overflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Signed Word Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUBM":
+            return {
+                "html": `
+                    <p>The <strong>vsububm</strong> instruction subtracts unsigned byte elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each byte element subtraction wraps around on overflow, retaining only the lower 8 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Byte Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUHM":
+            return {
+                "html": `
+                    <p>The <strong>vsubuhm</strong> instruction subtracts unsigned halfword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each halfword element subtraction wraps around on overflow, retaining only the lower 16 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Halfword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUWM":
+            return {
+                "html": `
+                    <p>The <strong>vsubuwm</strong> instruction subtracts unsigned word elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each word element subtraction wraps around on overflow, retaining only the lower 32 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Word Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUDM":
+            return {
+                "html": `
+                    <p>The <strong>vsubudm</strong> instruction subtracts unsigned doubleword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each doubleword element subtraction wraps around on overflow, retaining only the lower 64 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Doubleword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUBS":
+            return {
+                "html": `
+                    <p>The <strong>vsububs</strong> instruction subtracts unsigned byte elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each byte element subtraction is clamped to zero if underflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Byte Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUHS":
+            return {
+                "html": `
+                    <p>The <strong>vsubuhs</strong> instruction subtracts unsigned halfword elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each halfword element subtraction is clamped to zero if underflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Halfword Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUWS":
+            return {
+                "html": `
+                    <p>The <strong>vsubuws</strong> instruction subtracts unsigned word elements from two source vector registers with saturation and places the result in the target vector register.</p>
+                    <p>Each word element subtraction is clamped to zero if underflow occurs.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Word Saturate",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBUQM":
+            return {
+                "html": `
+                    <p>The <strong>vsubuqm</strong> instruction subtracts unsigned quadword elements from two source vector registers with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each quadword element subtraction wraps around on overflow, retaining only the lower 128 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Unsigned Quadword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBEUQM":
+            return {
+                "html": `
+                    <p>The <strong>vsubeuqm</strong> instruction subtracts unsigned quadword elements from two source vector registers, along with an extended borrow from a third vector register, with modulo arithmetic and places the result in the target vector register.</p>
+                    <p>Each quadword element subtraction includes a borrow and wraps around on overflow, retaining only the lower 128 bits of the result.</p>
+                `,
+                "tooltip": "Vector Subtract Extended Unsigned Quadword Modulo",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBCUQ":
+            return {
+                "html": `
+                    <p>The <strong>vsubcuq</strong> instruction subtracts unsigned quadword elements from two source vector registers and writes the carry-out to the target vector register.</p>
+                    <p>Each quadword element subtraction is performed independently, and the carry-out is placed into the corresponding quadword element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Subtract and Write Carry-out Unsigned Quadword",
+                "url": powerIsaDocumentation
+            };
+        case "VSUBECUQ":
+            return {
+                "html": `
+                    <p>The <strong>vsubecuq</strong> instruction subtracts unsigned quadword elements from two source vector registers, along with an extended borrow from a third vector register, and writes the carry-out to the target vector register.</p>
+                    <p>Each quadword element subtraction includes a borrow, and the carry-out is placed into the corresponding quadword element of the target vector register.</p>
+                `,
+                "tooltip": "Vector Subtract Extended and Write Carry-out Unsigned Quadword",
+                "url": powerIsaDocumentation
+            };
     }
 }
 
