@@ -4410,6 +4410,378 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 url: powerIsaDocumentation
             };
         }
+        case "LVEBX":
+            return {
+                "html": `
+                    <p>The <strong>lvebx</strong> instruction loads a byte element from a vector indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two general-purpose registers (GPRs).</p>
+                    <p>Based on the system's byte ordering, the specific byte is extracted from the memory and stored in the appropriate position within the target vector register.</p>
+                    <p>The remaining bytes of the target vector register are set to undefined values.</p>
+                `,
+                "tooltip": "Load Vector Element Byte Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "LVEHX":
+            return {
+                "html": `
+                    <p>The <strong>lvehx</strong> instruction loads a halfword element from a vector indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs, masked to align to a halfword boundary.</p>
+                    <p>Based on the system's byte ordering, the specific halfword is extracted from the memory and stored in the appropriate position within the target vector register.</p>
+                    <p>The remaining bytes of the target vector register are set to undefined values.</p>
+                `,
+                "tooltip": "Load Vector Element Halfword Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "LVEWX":
+            return {
+                "html": `
+                    <p>The <strong>lvewx</strong> instruction loads a word element from a vector indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs, masked to align to a word boundary.</p>
+                    <p>Based on the system's byte ordering, the specific word is extracted from the memory and stored in the appropriate position within the target vector register.</p>
+                    <p>The remaining bytes of the target vector register are set to undefined values.</p>
+                `,
+                "tooltip": "Load Vector Element Word Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "LVX":
+            return {
+                "html": `
+                    <p>The <strong>lvx</strong> instruction loads a quadword from a vector indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs, masked to align to a quadword boundary.</p>
+                    <p>The contents of the quadword in memory are placed into the target vector register.</p>
+                `,
+                "tooltip": "Load Vector Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "LVXL":
+            return {
+                "html": `
+                    <p>The <strong>lvxl</strong> instruction loads a quadword from a vector indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs, masked to align to a quadword boundary.</p>
+                    <p>This instruction provides a hint that the quadword in storage addressed by the effective address will probably not be needed again by the program in the near future.</p>
+                `,
+                "tooltip": "Load Vector Indexed Last",
+                "url": powerIsaDocumentation
+            };
+        case "STVEBX":
+            return {
+                "html": `
+                    <p>The <strong>stvebx</strong> instruction stores a byte element from a vector register into memory at an address indexed by two registers. The effective address is computed as the sum of the contents of two GPRs.</p>
+                    <p>Based on the system's byte ordering, the specific byte from the vector register is stored at the effective address in memory.</p>
+                `,
+                "tooltip": "Store Vector Element Byte Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "STVEHX":
+            return {
+                "html": `
+                    <p>The <strong>stvehx</strong> instruction stores a halfword element from a vector register into memory at an address indexed by two registers. The effective address is computed as the sum of the contents of two GPRs, masked to align to a halfword boundary.</p>
+                    <p>Based on the system's byte ordering, the specific halfword from the vector register is stored at the effective address in memory.</p>
+                `,
+                "tooltip": "Store Vector Element Halfword Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "STVEWX":
+            return {
+                "html": `
+                    <p>The <strong>stvewx</strong> instruction stores a word element from a vector register into memory at an address indexed by two registers. The effective address is computed as the sum of the contents of two GPRs, masked to align to a word boundary.</p>
+                    <p>Based on the system's byte ordering, the specific word from the vector register is stored at the effective address in memory.</p>
+                `,
+                "tooltip": "Store Vector Element Word Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "STVX":
+            return {
+                "html": `
+                    <p>The <strong>stvx</strong> instruction stores a quadword from a vector register into memory at an address indexed by two registers. The effective address is computed as the sum of the contents of two GPRs, masked to align to a quadword boundary.</p>
+                    <p>The contents of the vector register are stored in the quadword at the effective address in memory.</p>
+                `,
+                "tooltip": "Store Vector Indexed",
+                "url": powerIsaDocumentation
+            };
+        case "STVXL":
+            return {
+                "html": `
+                    <p>The <strong>stvxl</strong> instruction stores a quadword from a vector register into memory at an address indexed by two registers. The effective address is computed as the sum of the contents of two GPRs, masked to align to a quadword boundary.</p>
+                    <p>This instruction provides a hint that the quadword in storage addressed by the effective address will probably not be needed again by the program in the near future.</p>
+                `,
+                "tooltip": "Store Vector Indexed Last",
+                "url": powerIsaDocumentation
+            };
+        case "LVSL":
+            return {
+                "html": `
+                    <p>The <strong>lvsl</strong> instruction loads a vector for shift left from an address indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs.</p>
+                    <p>Based on the lower bits of the effective address, a specific byte pattern is selected and stored in the target vector register.</p>
+                `,
+                "tooltip": "Load Vector for Shift Left",
+                "url": powerIsaDocumentation
+            };
+        case "LVSR":
+            return {
+                "html": `
+                    <p>The <strong>lvsr</strong> instruction loads a vector for shift right from an address indexed by two registers and stores it in the specified target vector register. The effective address is computed as the sum of the contents of two GPRs.</p>
+                    <p>Based on the lower bits of the effective address, a specific byte pattern is selected and stored in the target vector register.</p>
+                `,
+                "tooltip": "Load Vector for Shift Right",
+                "url": powerIsaDocumentation
+            };
+        case "VPKPX":
+            return {
+                "html": `
+                    <p>The <strong>vpkpx</strong> instruction packs the lower half of each of two source vector registers into a target vector register.</p>
+                    <p>The lower half of each source vector is combined to form the target vector.</p>
+                `,
+                "tooltip": "Vector Pack Lower Half",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSHSS":
+            return {
+                "html": `
+                    <p>The <strong>vpkshss</strong> instruction packs signed halfword elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Halfword with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSHUS":
+            return {
+                "html": `
+                    <p>The <strong>vpkshus</strong> instruction packs signed halfword elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Halfword with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSWSS":
+            return {
+                "html": `
+                    <p>The <strong>vpkswss</strong> instruction packs signed word elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Word with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSWUS":
+            return {
+                "html": `
+                    <p>The <strong>vpkswus</strong> instruction packs signed word elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Word with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSDSS":
+            return {
+                "html": `
+                    <p>The <strong>vpksdss</strong> instruction packs signed doubleword elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Doubleword with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKSDUS":
+            return {
+                "html": `
+                    <p>The <strong>vpksdus</strong> instruction packs signed doubleword elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Signed Doubleword with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUHUM":
+            return {
+                "html": `
+                    <p>The <strong>vpkuhum</strong> instruction packs unsigned halfword elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Halfword with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUHUS":
+            return {
+                "html": `
+                    <p>The <strong>vpkuhus</strong> instruction packs unsigned halfword elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Halfword with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUWUM":
+            return {
+                "html": `
+                    <p>The <strong>vpkuwum</strong> instruction packs unsigned word elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Word with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUWUS":
+            return {
+                "html": `
+                    <p>The <strong>vpkuwus</strong> instruction packs unsigned word elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Word with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUDUM":
+            return {
+                "html": `
+                    <p>The <strong>vpkudum</strong> instruction packs unsigned doubleword elements from two source vector registers into a target vector register, with unsigned saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Doubleword with Unsigned Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VPKUDUS":
+            return {
+                "html": `
+                    <p>The <strong>vpkudus</strong> instruction packs unsigned doubleword elements from two source vector registers into a target vector register, with signed saturation.</p>
+                    <p>The elements are combined and any overflow is clamped to the maximum representable value.</p>
+                `,
+                "tooltip": "Vector Pack Unsigned Doubleword with Signed Saturation",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKHSB":
+            return {
+                "html": `
+                    <p>The <strong>vupkhsb</strong> instruction unpacks signed byte elements from a source vector register into halfword elements in the target vector register.</p>
+                    <p>The unpacked halfword elements are sign-extended from the original byte elements.</p>
+                `,
+                "tooltip": "Vector Unpack High Signed Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKLSB":
+            return {
+                "html": `
+                    <p>The <strong>vupklsb</strong> instruction unpacks signed byte elements from a source vector register into halfword elements in the target vector register.</p>
+                    <p>The unpacked halfword elements are zero-extended from the original byte elements.</p>
+                `,
+                "tooltip": "Vector Unpack Low Signed Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKHSH":
+            return {
+                "html": `
+                    <p>The <strong>vupkhsh</strong> instruction unpacks signed halfword elements from a source vector register into word elements in the target vector register.</p>
+                    <p>The unpacked word elements are sign-extended from the original halfword elements.</p>
+                `,
+                "tooltip": "Vector Unpack High Signed Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKLSH":
+            return {
+                "html": `
+                    <p>The <strong>vupklsh</strong> instruction unpacks signed halfword elements from a source vector register into word elements in the target vector register.</p>
+                    <p>The unpacked word elements are zero-extended from the original halfword elements.</p>
+                `,
+                "tooltip": "Vector Unpack Low Signed Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKHSW":
+            return {
+                "html": `
+                    <p>The <strong>vupkhsw</strong> instruction unpacks signed word elements from a source vector register into doubleword elements in the target vector register.</p>
+                    <p>The unpacked doubleword elements are sign-extended from the original word elements.</p>
+                `,
+                "tooltip": "Vector Unpack High Signed Word",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKLSW":
+            return {
+                "html": `
+                    <p>The <strong>vupklsw</strong> instruction unpacks signed word elements from a source vector register into doubleword elements in the target vector register.</p>
+                    <p>The unpacked doubleword elements are zero-extended from the original word elements.</p>
+                `,
+                "tooltip": "Vector Unpack Low Signed Word",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKHPX":
+            return {
+                "html": `
+                    <p>The <strong>vupkhpx</strong> instruction unpacks signed packed elements from a source vector register into extended elements in the target vector register.</p>
+                    <p>The unpacked extended elements are sign-extended from the original packed elements.</p>
+                `,
+                "tooltip": "Vector Unpack High Packed Extended",
+                "url": powerIsaDocumentation
+            };
+        case "VUPKLPX":
+            return {
+                "html": `
+                    <p>The <strong>vupklpx</strong> instruction unpacks signed packed elements from a source vector register into extended elements in the target vector register.</p>
+                    <p>The unpacked extended elements are zero-extended from the original packed elements.</p>
+                `,
+                "tooltip": "Vector Unpack Low Packed Extended",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGHB":
+            return {
+                "html": `
+                    <p>The <strong>vmrghb</strong> instruction merges the high-order bytes of two source vector registers into the target vector register.</p>
+                    <p>The high-order bytes of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge High Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGLB":
+            return {
+                "html": `
+                    <p>The <strong>vmrglb</strong> instruction merges the low-order bytes of two source vector registers into the target vector register.</p>
+                    <p>The low-order bytes of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge Low Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGHH":
+            return {
+                "html": `
+                    <p>The <strong>vmrghh</strong> instruction merges the high-order halfwords of two source vector registers into the target vector register.</p>
+                    <p>The high-order halfwords of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge High Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGLH":
+            return {
+                "html": `
+                    <p>The <strong>vmrglh</strong> instruction merges the low-order halfwords of two source vector registers into the target vector register.</p>
+                    <p>The low-order halfwords of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge Low Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGHW":
+            return {
+                "html": `
+                    <p>The <strong>vmrghw</strong> instruction merges the high-order words of two source vector registers into the target vector register.</p>
+                    <p>The high-order words of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge High Word",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGLW":
+            return {
+                "html": `
+                    <p>The <strong>vmrglw</strong> instruction merges the low-order words of two source vector registers into the target vector register.</p>
+                    <p>The low-order words of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge Low Word",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGEW":
+            return {
+                "html": `
+                    <p>The <strong>vmrgew</strong> instruction merges the even words of two source vector registers into the target vector register.</p>
+                    <p>The even words of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge Even Word",
+                "url": powerIsaDocumentation
+            };
+        case "VMRGOW":
+            return {
+                "html": `
+                    <p>The <strong>vmrgow</strong> instruction merges the odd words of two source vector registers into the target vector register.</p>
+                    <p>The odd words of each source vector are interleaved to form the target vector.</p>
+                `,
+                "tooltip": "Vector Merge Odd Word",
+                "url": powerIsaDocumentation
+            };
     }
 }
 
