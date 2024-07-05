@@ -4929,6 +4929,318 @@ export function getAsmOpcode(opcode: string | undefined): AssemblyInstructionInf
                 "tooltip": "Vector Shift Right Variable",
                 "url": powerIsaDocumentation
             };
+        case "VEXTRACTUB":
+            return {
+                "html": `
+                    <p>The <strong>vextractub</strong> instruction extracts a byte element from a vector register and places it into a general-purpose register. The source byte is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTRACTUH":
+            return {
+                "html": `
+                    <p>The <strong>vextractuh</strong> instruction extracts a halfword element from a vector register and places it into a general-purpose register. The source halfword is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTRACTUW":
+            return {
+                "html": `
+                    <p>The <strong>vextractuw</strong> instruction extracts a word element from a vector register and places it into a general-purpose register. The source word is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Word",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTRACTD":
+            return {
+                "html": `
+                    <p>The <strong>vextractd</strong> instruction extracts a doubleword element from a vector register and places it into a general-purpose register. The source doubleword is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Extract Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUBLX":
+            return {
+                "html": `
+                    <p>The <strong>vextublx</strong> instruction extracts an unsigned byte from a vector register and places it into a general-purpose register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Byte with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUBRX":
+            return {
+                "html": `
+                    <p>The <strong>vextubrx</strong> instruction extracts an unsigned byte from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Byte with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUHLX":
+            return {
+                "html": `
+                    <p>The <strong>vextuhlx</strong> instruction extracts an unsigned halfword from a vector register and places it into a general-purpose register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Halfword with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUHRX":
+            return {
+                "html": `
+                    <p>The <strong>vextuhrx</strong> instruction extracts an unsigned halfword from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Halfword with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUWLX":
+            return {
+                "html": `
+                    <p>The <strong>vextuwlx</strong> instruction extracts an unsigned word from a vector register and places it into a general-purpose register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Word with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTUWRX":
+            return {
+                "html": `
+                    <p>The <strong>vextuwrx</strong> instruction extracts an unsigned word from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Word with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUBVLX":
+            return {
+                "html": `
+                    <p>The <strong>vextdubvlx</strong> instruction extracts an unsigned doubleword from a vector register and places it into a general-purpose register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Doubleword with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUBVRX":
+            return {
+                "html": `
+                    <p>The <strong>vextdubvrx</strong> instruction extracts an unsigned doubleword from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Doubleword with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUHVLX":
+            return {
+                "html": `
+                    <p>The <strong>vextduhvlx</strong> instruction extracts an unsigned halfword from a vector register and places it into a general-purpose register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Halfword with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUHVRX":
+            return {
+                "html": `
+                    <p>The <strong>vextduhvrx</strong> instruction extracts an unsigned halfword from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Halfword with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUWVLX":
+            return {
+                "html": `
+                    <p>The <strong>vextduwvlx</strong> instruction extracts an unsigned word from a vector register and places it into a general-purpose register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Word with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDUWVRX":
+            return {
+                "html": `
+                    <p>The <strong>vextduwvrx</strong> instruction extracts an unsigned word from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Word with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDDVLX":
+            return {
+                "html": `
+                    <p>The <strong>vextddvlx</strong> instruction extracts an unsigned doubleword from a vector register and places it into a general-purpose register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Doubleword with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VEXTDDVRX":
+            return {
+                "html": `
+                    <p>The <strong>vextddvrx</strong> instruction extracts an unsigned doubleword from a vector register and places it into a general-purpose register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Extract Unsigned Doubleword with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSERTB":
+            return {
+                "html": `
+                    <p>The <strong>vinserb</strong> instruction inserts a byte element from a general-purpose register into a vector register. The destination byte is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Insert Byte",
+                "url": powerIsaDocumentation
+            };
+        case "VINSERTH":
+            return {
+                "html": `
+                    <p>The <strong>vinserth</strong> instruction inserts a halfword element from a general-purpose register into a vector register. The destination halfword is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Insert Halfword",
+                "url": powerIsaDocumentation
+            };
+        case "VINSERTW":
+            return {
+                "html": `
+                    <p>The <strong>vinserw</strong> instruction inserts a word element from a general-purpose register into a vector register. The destination word is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Insert Word",
+                "url": powerIsaDocumentation
+            };
+        case "VINSERTD":
+            return {
+                "html": `
+                    <p>The <strong>vinserd</strong> instruction inserts a doubleword element from a general-purpose register into a vector register. The destination doubleword is specified by an immediate value.</p>
+                `,
+                "tooltip": "Vector Insert Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "VINSBLX":
+            return {
+                "html": `
+                    <p>The <strong>vinsblx</strong> instruction inserts a byte from a general-purpose register into a vector register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Insert Byte with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSBRX":
+            return {
+                "html": `
+                    <p>The <strong>vinsbrx</strong> instruction inserts a byte from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Insert Byte with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSHLX":
+            return {
+                "html": `
+                    <p>The <strong>vinshlx</strong> instruction inserts a halfword from a general-purpose register into a vector register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Insert Halfword with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSHRX":
+            return {
+                "html": `
+                    <p>The <strong>vinshrx</strong> instruction inserts a halfword from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Insert Halfword with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSWLX":
+            return {
+                "html": `
+                    <p>The <strong>vinswlx</strong> instruction inserts a word from a general-purpose register into a vector register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Insert Word with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSWRX":
+            return {
+                "html": `
+                    <p>The <strong>vinswrx</strong> instruction inserts a word from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Insert Word with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSBLX":
+            return {
+                "html": `
+                    <p>The <strong>vinsblx</strong> instruction inserts a byte from a general-purpose register into a vector register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Insert Byte with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSDLX":
+            return {
+                "html": `
+                    <p>The <strong>vinsdlx</strong> instruction inserts a doubleword from a general-purpose register into a vector register, using an indexed addressing mode.</p>
+                `,
+                "tooltip": "Vector Insert Doubleword with Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSDRX":
+            return {
+                "html": `
+                    <p>The <strong>vinsdrx</strong> instruction inserts a doubleword from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness.</p>
+                `,
+                "tooltip": "Vector Insert Doubleword with Reverse Index",
+                "url": powerIsaDocumentation
+            };
+        case "VINSW":
+            return {
+                "html": `
+                    <p>The <strong>vinsw</strong> instruction inserts a word element from a general-purpose register into a vector register.</p>
+                `,
+                "tooltip": "Vector Insert Word",
+                "url": powerIsaDocumentation
+            };
+        case "VINSD":
+            return {
+                "html": `
+                    <p>The <strong>vinsd</strong> instruction inserts a doubleword element from a general-purpose register into a vector register.</p>
+                `,
+                "tooltip": "Vector Insert Doubleword",
+                "url": powerIsaDocumentation
+            };
+        case "VINSBVLX":
+            return {
+                "html": `
+                    <p>The <strong>vinsbvlx</strong> instruction inserts a byte from a general-purpose register into a vector register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Insert Byte with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSBVRX":
+            return {
+                "html": `
+                    <p>The <strong>vinsbvrx</strong> instruction inserts a byte from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Insert Byte with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSHVLX":
+            return {
+                "html": `
+                    <p>The <strong>vinshvlx</strong> instruction inserts a halfword from a general-purpose register into a vector register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Insert Halfword with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSHVRX":
+            return {
+                "html": `
+                    <p>The <strong>vinshvrx</strong> instruction inserts a halfword from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Insert Halfword with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSWVLX":
+            return {
+                "html": `
+                    <p>The <strong>vinswvlx</strong> instruction inserts a word from a general-purpose register into a vector register, using an indexed addressing mode with a hint.</p>
+                `,
+                "tooltip": "Vector Insert Word with Index and Hint",
+                "url": powerIsaDocumentation
+            };
+        case "VINSWVRX":
+            return {
+                "html": `
+                    <p>The <strong>vinswvrx</strong> instruction inserts a word from a general-purpose register into a vector register, using an indexed addressing mode with reverse endianness and a hint.</p>
+                `,
+                "tooltip": "Vector Insert Word with Reverse Index and Hint",
+                "url": powerIsaDocumentation
+            };
     }
 }
 
